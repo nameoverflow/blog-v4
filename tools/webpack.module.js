@@ -1,3 +1,4 @@
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
 var path = require('path');
 var babel_loader = 'babel?presets[]=react,presets[]=es2015,plugins[]=transform-async-to-generator,plugins[]=transform-decorators-legacy'
 module.exports = {
@@ -11,15 +12,15 @@ module.exports = {
       include: path.join(__dirname, '../view')
     }, {
       test: /\.sass$/,
-      loaders: ["style", "css", "sass?indentedSyntax"]
+      loader: ExtractTextPlugin.extract("style", ["css", "sass?indentedSyntax"])
     }, {
       test: /\.s?css$/,
-      loaders: ["style", "css", "sass"]
+      loader: ExtractTextPlugin.extract("style", ["css", "sass"])
     }, {
       test: /\.png$/,
-      loader: "url-loader?limit=100000"
+      loader: "url?limit=100000"
     }, {
-      test: /\.jpg$/,
-      loader: "file-loader"
+      test: /\.(jpg|svg)$/,
+      loader: "file?name=[name].[ext]"
     }]
   }

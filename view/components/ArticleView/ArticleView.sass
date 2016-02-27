@@ -1,0 +1,39 @@
+.ArticleView
+    margin-top: 4em
+    .title
+        text-align: left
+        margin-bottom: 4em
+        h1
+            font-size: 2rem
+            font-weight: 400
+            margin-bottom: 0.3em
+            margin-left: -10%
+        a
+            border: none
+            color: #111
+.ArticleMeta
+    font-size: 0.8em
+    color: #bbb
+    margin: 2.5em auto
+    a
+        border-bottom: 1px #bbb solid
+    &:hover
+        color: #333
+        a
+            border-bottom: 1px #333 solid
+
+    div:nth-child(1)
+        position: relative
+        width: 49%
+        text-align: right
+        &::after
+            content: '/'
+            font-size: 300%
+            font-weight: 100
+            position: absolute
+            top: -8px
+            right: -18px
+    div:nth-child(2)
+        width: 49%
+        margin-left: auto
+        margin-right: 0

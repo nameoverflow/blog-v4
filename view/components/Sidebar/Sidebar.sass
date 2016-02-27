@@ -13,6 +13,24 @@ $av_size: 130px
     background-color: #FFFFFF
     > section
         width 100%
+    .menu
+        box-sizing: border-box
+        position: absolute
+        top: $header_height + 50px
+        width: $header_width
+        margin: 0
+        text-align: right
+        line-height: 1.7em
+        > ul
+            padding-top: 2em
+            > li
+                border-right: 3px rgb(51,51,51) solid
+                padding-right: 1em
+                list-style: none
+                line-height: 1em
+                margin: 2rem 0
+                a
+                    border-bottom: none
 
 .avatar
     height: $header_height
@@ -30,3 +48,5 @@ $av_size: 130px
         margin-right: auto
         border-radius: 50%
         background-color: #FFFFFF
+        background-image: url(../../assert/tree_small.png)
+        background-size: 100%

@@ -1,32 +1,52 @@
 import React, { Component, PropTypes } from 'react'
-import {Link} from 'react-router';
+import { Link } from 'react-router';
+import { formatTime } from '../../utils'
+
+if (typeof window !== 'undefined') {
+    require('./ListView.sass')
+}
 
 const Meta = ({ tags, createDate }) =>
-    <div>
+    <div className='ListMeta'>
         <time>
-            创建于&nbsp;{ new Date(createDate).toDateString() }
+            { formatTime(createDate) }
         </time>
         {tags && tags[0] ? ' |' : ''}
         {
             tags && tags.map(tag =>
-                <a href="#" key={tag}>
+                <span className="meta-text" key={tag}>
                     {' { '}
-                    <span className="meta-text">{ tag }</span>
+                    <a href="#">{ tag }</a>
                     {' } '}
-                </a>)
+                </span>)
         }
 
     </div>
 
 
 
-export default ({ children: { _id, title, body, createDate, tags, summary } }) => 
-    <article>
-        <header>
-            <Link to={`/article/${_id}`}>
-                <h1>{ title }</h1>
-            </Link>
-        </header>
-        <Meta {...{ tags, time: createDate }} />
-        <main dangerouslySetInnerHTML={{ __html: body || summary }} />
-    </article>
+export default ({ children: entity }) => {
+    const {
+        _id, title, body, createDate, tags, summary
+    } = entity
+    return (
+        <article className='ListView'>
+            <header className='title'>
+                <h1>
+                    <Link to={`/article/${_id}`}>
+                        { title }
+                    </Link>
+                </h1>
+                <Meta {...{ tags, createDate }} />
+            </header>
+            <main dangerouslySetInnerHTML={{ __html: summary || body }} />
+            <div className="more-link" style={{
+                'display': entity.break ? 'block' : 'none'
+            }}>
+                <Link to={`/article/${_id}`} className="no-ani">
+                    ReadOn »
+                </Link>
+            </div>
+        </article>
+    )
+}

@@ -14,8 +14,6 @@ import { apiFactory } from './middleware'
 import Root from './containers/Root'
 import routes from './routes'
 
-const initial_state = process.env.NODE_ENV === 'production' ?
-    window.__INITIAL_STATE__ : {}
 
 const makeRequest = (url, opt) => {
     const { origin } = window.location
@@ -24,8 +22,11 @@ const makeRequest = (url, opt) => {
         .then(res => res.json())
 }
 
-const store = createStore(reducer, initial_state, applyMiddleware(apiFactory(makeRequest)))
-const history = syncHistoryWithStore(browserHistory, store)
+const
+    initial_state = window.__INITIAL_STATE__,
+    middleware = applyMiddleware(apiFactory(makeRequest)),
+    store = createStore(reducer, initial_state, middleware),
+    history = syncHistoryWithStore(browserHistory, store)
 
 
 render(

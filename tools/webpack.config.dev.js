@@ -1,7 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
-var webpack_module = require('./webpack.module')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+
+var webpack_module = require('./webpack.module')
 var root_path = path.join(__dirname, '..')
 var view_src = path.join(root_path, 'view')
 
@@ -20,7 +22,8 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('bundle.css')
   ],
   module: webpack_module,
   resolve: {

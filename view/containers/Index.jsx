@@ -31,15 +31,15 @@ class Index extends Component {
 
         const view = list.length ? list.map(v => (
             <li key={ v._id }>
-                <ArticleView>
+                <ListView>
                     { v }
-                </ArticleView>
+                </ListView>
             </li>
         )) : <li> LOADING </li>
 
         const tail = <li onClick={this.handleLoadMore}>LOAD MORE</li>
         return (
-            <ul>
+            <ul className='Index'>
                 { view }
                 { list.length && tail }
             </ul>

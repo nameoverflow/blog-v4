@@ -1,8 +1,40 @@
+$link_color_d: rgb(104, 104, 104)
+$link_color_h: rgb(14, 14, 14)
+
+body
+    font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif
+
+a
+    text-decoration: none
+    color: $link_color_d
+    border-bottom: 1px $link_color_d solid
+    &:hover
+        color: $link_color_h
+        border-bottom: 1px $link_color_h solid
+
+p
+    line-height: 1.7em
+    color: rgb(74, 74, 74)
+
+code
+    font-family: Monaco, Menlo, Consolas, 'Microsoft Yahei', monospace
+    pre
+        width: 85%
+        overflow-x: auto
+        font-family: inherit
+        font-size: 13px
+        line-height: 1.6em
+
 .container
     box-sizing: border-box
     position: absolute
     left: 240px
     right: 0
-    top: 5em
     margin: auto
     max-width: 960px
+    width: 60%
+
+.Index
+    padding: 0
+    > li
+        list-style: none
