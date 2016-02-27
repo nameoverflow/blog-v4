@@ -1,0 +1,32 @@
+$header_width: 240px
+$header_height: 180px
+$av_size: 130px
+.Header
+    position: fixed
+    width: $header_width
+    overflow: hidden
+    top: 0
+    left: 0
+    bottom: 0
+    height: 100%
+    position: fixed
+    background-color: #FFFFFF
+    > section
+        width 100%
+
+.avatar
+    height: $header_height
+    background-color: #333
+    background-image: url(../../assert/header.png)
+    position: absolute
+    width: 100%
+    top: 0
+    > .av-pic
+        display: block
+        width: $av_size
+        height: $av_size
+        margin-top: $header_height - ($av_size / 2)
+        margin-left: auto
+        margin-right: auto
+        border-radius: 50%
+        background-color: #FFFFFF
