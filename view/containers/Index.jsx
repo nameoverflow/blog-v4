@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { loadIndex } from '../actions/article'
 import ListView from '../components/ListView'
+import { alignScrollTop } from '../utils'
 
 @connect(
     state => ({ loaded: state.index }),
@@ -12,6 +13,7 @@ import ListView from '../components/ListView'
         }
     })
 )
+@alignScrollTop
 class Index extends Component {
     constructor(props) {
         super(props)
@@ -50,7 +52,7 @@ class Index extends Component {
     }
 }
 Index.propTypes = {
-    loaded: PropTypes.array.isRequired,
-    load: PropTypes.func.isRequired
+    loaded: PropTypes.array,
+    load: PropTypes.func
 }
 export default Index

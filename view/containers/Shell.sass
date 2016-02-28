@@ -1,8 +1,14 @@
 $link_color_d: rgb(104, 104, 104)
 $link_color_h: rgb(14, 14, 14)
+@mixin fill-full($left, $right)
+    position: absolute
+    left: $left
+    right: $right
 
 body
     font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif
+    line-height: 1.7em
+    color: rgb(74, 74, 74)
 
 a
     text-decoration: none
@@ -12,29 +18,81 @@ a
         color: $link_color_h
         border-bottom: 1px $link_color_h solid
 
-p
-    line-height: 1.7em
-    color: rgb(74, 74, 74)
 
 code
     font-family: Monaco, Menlo, Consolas, 'Microsoft Yahei', monospace
+    font-size: 13px
+    margin: auto 5px
     pre
-        width: 85%
+        width: 90%
+        margin: auto
         overflow-x: auto
         font-family: inherit
         font-size: 13px
         line-height: 1.6em
 
+img
+    max-width: 100%
+
 .container
     box-sizing: border-box
-    position: absolute
-    left: 240px
-    right: 0
+    @include fill-full(240px, 0)
     margin: auto
     max-width: 960px
     width: 60%
 
 .Index
     padding: 0
+    margin: 0
     > li
         list-style: none
+
+
+.route-trans-enter
+    @include fill-full(0, 0)
+    transform: translateX(-100px)
+    opacity: 0
+    // transition: transform 0.5s ease-in, opacity 0.5s ease-out
+
+.route-trans-enter.route-trans-enter-active
+    // transform: translateX(0)
+    // opacity: 1
+    animation: route-trans-e 0.8s
+    animation-fill-mode: forwards
+
+
+.route-trans-leave
+    @include fill-full(0, 0)
+    transform: translateX(0)
+    opacity: 1
+    // transition: transform 0.5s ease-in, opacity 0.5s ease-out
+
+.route-trans-leave.route-trans-leave-active
+    // transform: translateX(100px)
+    // opacity: 0
+    // transition: transform 0.5s ease-in, opacity 0.5s ease-out
+    animation: route-trans-o 0.8s
+    animation-fill-mode: forwards
+
+@keyframes route-trans-e
+    0%
+        transform: translateX(-100px)
+        opacity: 0
+    50%
+        transform: translateX(-100px)
+        opacity: 0
+    100%
+        transform: translateX(0)
+        opacity: 1
+
+@keyframes route-trans-o
+    0%
+        transform: translateX(0)
+        opacity: 1
+    50%
+        transform: translateX(100px)
+        opacity: 0
+    100%
+        transform: translateX(100px)
+        opacity: 0
+

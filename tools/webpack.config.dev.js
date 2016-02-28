@@ -7,6 +7,8 @@ var webpack_module = require('./webpack.module')
 var root_path = path.join(__dirname, '..')
 var view_src = path.join(root_path, 'view')
 
+var babel_loader = 'babel?presets[]=react,presets[]=es2015,plugins[]=transform-async-to-generator,plugins[]=transform-decorators-legacy'
+
 module.exports = {
   devtool: 'eval',
   entry: {
@@ -23,9 +25,30 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('bundle.css')
   ],
-  module: webpack_module,
+  module: {
+    loaders: [{
+      test: /\.jsx$/,
+      loaders: ['react-hot', babel_loader],
+      include: path.join(__dirname, '../view')
+    }, {
+      test: /\.js$/,
+      loaders: [babel_loader],
+      include: path.join(__dirname, '../view')
+    }, {
+      test: /\.sass$/,
+      loaders: ["style", "css", "sass?indentedSyntax"]
+    }, {
+      test: /\.s?css$/,
+      loaders: ["style", "css", "sass"]
+    }, {
+      test: /\.png$/,
+      loader: "url?limit=100000"
+    }, {
+      test: /\.(jpg|svg)$/,
+      loader: "file?name=[name].[ext]"
+    }]
+  },
   resolve: {
     extensions: ['.js', '.jsx', '']
   }

@@ -5,6 +5,8 @@ import { loadSingle, clearSingle } from '../actions/article'
 import ArticleView from '../components/ArticleView'
 import Comment from '../components/Comment'
 
+import { alignScrollTop } from '../utils'
+
 const stateToProp = (state, ownProps) => ({
     data: state.single,
     id: ownProps.params.id
@@ -20,6 +22,7 @@ const dispToProp = dispatch => ({
 })
 
 @connect(stateToProp, dispToProp)
+@alignScrollTop
 class Single extends Component {
     constructor(props) {
         super(props)
@@ -45,10 +48,10 @@ class Single extends Component {
     }
 }
 Single.propTypes = {
-    id: PropTypes.string.isRequired,
-    load: PropTypes.func.isRequired,
-    clear: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired
+    id: PropTypes.string,
+    load: PropTypes.func,
+    clear: PropTypes.func,
+    data: PropTypes.object
 }
 
 export default Single

@@ -6,8 +6,8 @@
   "scripts": {
     "test": "mocha",
     "start": "node tools/starter",
-    "dev": "cp view/assert/* public && node tools/devServer.js",
-    "deploy": "webpack -p --config tools/webpack.production.config.js"
+    "dev": "node tools/devServer.js",
+    "deploy": "webpack -p --config ./tools/webpack.config.prod.js"
   },
   "author": "hcyue",
   "license": "MIT",
@@ -27,6 +27,7 @@
     "mongoose": "^4.4.4",
     "pygmentize-bundled": "^2.3.0",
     "react": "^0.14.7",
+    "react-addons-css-transition-group": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",

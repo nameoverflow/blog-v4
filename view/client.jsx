@@ -28,7 +28,6 @@ const
     store = createStore(reducer, initial_state, middleware),
     history = syncHistoryWithStore(browserHistory, store)
 
-
 render(
   <Root {...{ store, history }}>
       { routes }

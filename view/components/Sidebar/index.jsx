@@ -5,14 +5,10 @@ const list = ['home', 'archives', 'lab', 'about']
 
 if (typeof window !== 'undefined') {
     require('./Sidebar.sass')
-    list.map(v => require(`../../assert/${v}.svg`))
 }
 
 const Btn = ({ name }) =>
     <Link to={`/${name == 'home' ? '' : name}`} className="Btn">
-       {
-       // <img src={`/static/${name}.svg`} type="image/svg+xml"/>
-       }
        { name }
     </Link>
 

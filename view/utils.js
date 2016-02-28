@@ -1,4 +1,20 @@
+import React, { Component, PropTypes } from 'react'
 
+export const alignScrollTop = (ComposedComponent) => {
+    class autoAlign extends Component {
+        constructor(props) {
+            super(props)
+        }
+        componentDidMount() {
+            window.scroll(0, 0)
+        }
+        render() {
+            return <ComposedComponent { ...this.props } />
+        }
+    }
+    autoAlign.fetchData = ComposedComponent.fetchData
+    return autoAlign
+}
 
 export const formatTime = (function() {
     const days = [
