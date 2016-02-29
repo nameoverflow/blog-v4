@@ -1,21 +1,18 @@
 import React, { Component, PropTypes } from 'react'
 
-import { formatTime } from '../../utils'
+import TagList from '../TagList'
+import Time from '../Time'
+
 if (typeof window !== 'undefined') {
     require('./ArticleView.sass')
 }
 
 const Meta = ({ tags, createDate }) =>
     <section className='ArticleMeta'>
-        <div>发布于<time>&nbsp;{ formatTime(createDate) }</time></div>
-        <div>tags:{
-            tags && tags.map(tag =>
-                <span className="meta-text" key={tag}>
-                    {' { '}
-                    <a href="#">{ tag }</a>
-                    {' } '}
-                </span>)
-        }</div>
+        <div>发布于&nbsp; <Time {...{ createDate }} /> </div>
+
+        { tags && tags.length ? <div>tags:{ TagList(tags) }</div> : [] }
+
     </section>
 
 export default ({ children: { _id, title, body, createDate, tags } }) => 

@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch'
 import {
     GET_INDEX_SUCCESS,
     GET_INDEX_FAILURE,

@@ -26,15 +26,16 @@ export default function addRoutes(server) {
         .get(article.index)
         .post(article.edit)
 
-    api.route('/article/archive')
-        .get(article.titles)
-
-    api.route('/article/time')
-        .get(article.archive)
-
     api.route('/article/::')
         .get(article.singleArticle)
         .post(article.edit)
+
+    api.route('/archive/::')
+        .get(article.archive)
+
+    api.route('/time')
+        .get(article.years)
+
 
     api.route('/page')
 

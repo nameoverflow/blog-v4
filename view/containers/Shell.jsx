@@ -5,9 +5,9 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Sidebar from '../components/Sidebar'
 
 if (typeof window !== 'undefined') {
-    require('./normalize.css')
+    require('../assert/normalize.css')
     require('./Shell.sass')
-    require('./github.css')
+    require('../assert/github.css')
 }
 
 
@@ -21,11 +21,11 @@ export default ({ children, location }) => {
                   transitionName="route-trans"
                   transitionEnterTimeout={800}
                   transitionLeaveTimeout={800}
-                >
-                    {React.cloneElement(children, {
+                >{
+                    React.cloneElement(children, {
                         key: location.pathname
-                    })}
-                </ReactCSSTransitionGroup>
+                    })
+                }</ReactCSSTransitionGroup>
             {/* children */}
             </main>
         </div>

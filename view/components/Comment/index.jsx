@@ -27,3 +27,4 @@ export default class Comment extends Component {
         return <div id="disqus_thread" />
     }
 }
+

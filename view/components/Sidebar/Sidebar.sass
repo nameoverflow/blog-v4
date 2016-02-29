@@ -1,7 +1,8 @@
 $header_width: 240px
 $header_height: 180px
 $av_size: 130px
-.Header
+
+.SideBar
     position: fixed
     width: $header_width
     overflow: hidden
@@ -50,3 +51,34 @@ $av_size: 130px
         background-color: #FFFFFF
         background-image: url(../../assert/tree_small.png)
         background-size: 100%
+
+@media screen and (max-width: 1024px)
+    .SideBar
+        position: absolute
+        left: 0
+        right: 0
+        height: 10em
+        width: auto
+        overflow: visible
+        .menu
+            position: relative
+            top: $header_height / 1.5 + ($av_size / 2)
+            text-align: center
+            width: 100%
+            > ul
+                display: flex
+                align-items: center
+                width: 50%
+                min-width: 280px
+                margin: 0 auto
+                padding: 0
+                > li
+                    margin: 1em 0
+                    padding: 0
+                    flex: 1
+                    border: none
+                    min-width: 70px
+    .avatar
+        height: $header_height / 1.5
+        > .av-pic
+            margin-top: $header_height / 1.5 - ($av_size / 2)

@@ -9,7 +9,7 @@ import {
 import Shell from './containers/Shell'
 import Single from './containers/Single'
 import Index from './containers/Index'
-// import Archives from './containers/Archives'
+import Archives from './containers/Archives'
 // import Page from './containers/Page'
 // import Lab from './containers/Lab'
 
@@ -20,8 +20,8 @@ export const routes = (
         {
         // <Route path="lab" component={Lab} name='lab'/>
         // <Route path=":title" component={Page} name='page'/>
-        // <Route path="archives" component={Archives} name='archives'/>
         }
+        <Route path="archives" component={Archives} name='archives'/>
         <Route path="article/:id" component={Single} name='article'/>
     </Route>
 )

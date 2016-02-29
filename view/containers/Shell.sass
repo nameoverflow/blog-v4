@@ -34,6 +34,10 @@ code
 img
     max-width: 100%
 
+sup
+    a
+        border-bottom: none
+
 .container
     box-sizing: border-box
     @include fill-full(240px, 0)
@@ -47,6 +51,25 @@ img
     > li
         list-style: none
 
+@media screen and (max-width: 1024px)
+    .container
+        @include fill-full(0, 0)
+        padding: 20em 4%
+        max-width: none
+        width: auto
+        &::before
+            content: ''
+            display: block
+            position: relative
+            height: 1px
+            width: 10%
+            background-color: #cdcdcd
+            top: 3.5em
+            margin: auto
+
+@media screen and (max-width: 450px)
+    html, body
+        font-size: 90%
 
 .route-trans-enter
     @include fill-full(0, 0)

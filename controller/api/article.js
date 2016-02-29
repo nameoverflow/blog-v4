@@ -1,7 +1,11 @@
 "use strict"
-import * as article from '../../model/article'
-import { getList, getTime } from '../../model/articleList'
 import marked from 'marked'
+
+import * as article from '../../model/article'
+import {
+    getList, getByTime, firstYear
+} from '../../model/articleList'
+
 
 /**
  * Controllers about article
@@ -44,19 +48,26 @@ export function *titles() {
 /**
  * Get archive by time
  */
-export function  *archive() {
-    const
-        start = +this.query['start'],
-        end = +this.query['end'],
-        list = yield getTime(start, end)
-
+export function *archive(year) {
+    // TODO: Get one year
+    const start_time = new Date(+year, 0, 1).getTime()
+    const end_time = new Date(+year + 1, 0, 1).getTime()
+    const data = yield getByTime(start_time, end_time)
+    this.send('json', data)
+}
+export function *years() {
+    const first_year = yield firstYear()
+    const cur = new Date().getFullYear()
+    let list = []
+    for (let i = cur; i >= first_year; i--) {
+        list.push(i)
+    }
     this.send('json', list)
 }
-
 /**
  * Edit or create new article
  */
-export function  *edit(id, child) {
+export function *edit(id, child) {
     const session = yield this.session()
     if (!session.data.auth) {
         return this.redirect('/login')

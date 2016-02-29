@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router';
-import { formatTime } from '../../utils'
+import { Link } from 'react-router'
+
+import TagList from '../TagList'
+import Time from '../Time'
 
 if (typeof window !== 'undefined') {
     require('./ListView.sass')
@@ -8,19 +10,8 @@ if (typeof window !== 'undefined') {
 
 const Meta = ({ tags, createDate }) =>
     <div className='ListMeta'>
-        <time>
-            { formatTime(createDate) }
-        </time>
-        {tags && tags[0] ? ' |' : ''}
-        {
-            tags && tags.map(tag =>
-                <span className="meta-text" key={tag}>
-                    {' { '}
-                    <a href="#">{ tag }</a>
-                    {' } '}
-                </span>)
-        }
-
+        <Time {...{ createDate }} />
+        { tags && tags[0] ? [' |', ...TagList(tags)] : [] }
     </div>
 
 
@@ -43,7 +34,7 @@ export default ({ children: entity }) => {
             <div className="more-link" style={{
                 'display': entity.break ? 'block' : 'none'
             }}>
-                <Link to={`/article/${_id}`} className="no-ani">
+                <Link to={`/article/${_id}`}>
                     ReadOn »
                 </Link>
             </div>

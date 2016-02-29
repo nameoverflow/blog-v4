@@ -5,14 +5,15 @@ export const apiFactory = makeRequest => store => next => action => {
         return next(action)
     }
     const req = action[CALL_API]
-    const { method, url, success, fail } = req
+    const { method, url, success, fail, extra } = req
     return makeRequest(url, { method })
         .then(data => next({
             type: success,
-            data: data
+            data: data,
+            extra
         }))
         .catch(err => {
-            console.log(err)
+            console.log(err.stack)
             return next({
                 type: fail,
                 err: err
