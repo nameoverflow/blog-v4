@@ -36,7 +36,7 @@ export default class Archives extends Component {
                 display = { props.display[time] || false }
                 toggle = { props.toggleTimeSect } /> )
 
-        return <div> { list } </div>
+        return <div className="Archives"> { list } </div>
     }
 
     static fetchData(store) {

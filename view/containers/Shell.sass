@@ -50,7 +50,41 @@ sup
     margin: 0
     > li
         list-style: none
+.Archives
+    $side_padding: 1.5rem
+    $line_posi: 0
+    $cir_width_b: 1rem
+    $cir_width_sm: $cir_width_b * 0.7
+    position: relative
+    padding: 7em $side_padding 0
+    &::before
+        position: absolute
+        top: 0
+        bottom: 0
+        left: $line_posi
+        height: auto
+        content: ''
+        background-color: #ddd
+        width: 1px
 
+    h1, h2
+        font-weight: 400
+        &::before
+            position: absolute
+            left: $line_posi - $cir_width_b / 2
+            content: ''
+            background-color: #ddd
+            width: $cir_width_b
+            height: $cir_width_b
+            border-radius: 50%
+            margin-top: 0.3rem
+    h2
+        font-size: 1.3rem
+        margin-bottom: 0
+        &::before
+            left: $line_posi - $cir_width_sm / 2
+            width: $cir_width_sm
+            height: $cir_width_sm
 @media screen and (max-width: 1024px)
     .container
         @include fill-full(0, 0)

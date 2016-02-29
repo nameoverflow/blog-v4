@@ -10,7 +10,9 @@ if (typeof window !== 'undefined') {
 
 const Title = ({ tags, title, _id, createDate }) =>
     <li>
-        <h2> { title } </h2>
+        <Link to={`/article/${_id}`}>
+            <h2> { title } </h2>
+        </Link>
         <div className='ListMeta'>
             <Time {...{ createDate }} />
             { tags && tags[0] ? [' |', ...TagList(tags)] : [] }
@@ -29,28 +31,47 @@ export default class TimeSection extends Component {
     }
 
     transHeight(origin) {
-        const { theSection } = this.refs
-        requestAnimationFrame(() => {
-            const target = this.getHeight()
-            theSection.style.height = origin
+        const { theSection, theList } = this.refs
+        return new Promise(res => {
             requestAnimationFrame(() => {
-                theSection.style.height = target
+                const target = this.getHeight()
+                theSection.style.height = origin
+                theList.style.opacity = 0
+                requestAnimationFrame(() => {
+                    theSection.style.transition = 'height 800ms ease'
+                    theSection.style.height = target
+                    theList.style.opacity = 1
+                    const callback = () => {
+                        theSection.removeEventListener('transitionend', callback)
+                        res()
+                    }
+                    theSection.addEventListener('transitionend', callback)
+                })
             })
+        }).then(() => {
+            theSection.style.transition = ''
+            theSection.style.height = 'auto'
         })
     }
     handleClick(e) {
         const { display, toggle, data, load, time } = this.props
         const { theSection } = this.refs
+        if (display) {
+            toggle(time)
+            return
+        }
         if (!(data && data.length)) {
+            toggle(time)
+            const height = this.getHeight()
             load(time).then(() => {
-                const height = this.getHeight()
                 this.transHeight(height)
             })
+        } else {
+            const height = this.getHeight()
+            theSection.style.height = height
+            toggle(time)
+            this.transHeight(height)
         }
-        const height = this.getHeight()
-        theSection.style.height = height
-        toggle(time)
-        this.transHeight(height)
     }
     render() {
         const { display, toggle, data, load, time } = this.props
@@ -61,8 +82,8 @@ export default class TimeSection extends Component {
                 </h1>
                 <ul ref='theList' style={{ display: this.styles[+display] }}>
                     { data ? data.map(entity => 
-                                <Title { ...entity } key={entity._id}/>) 
-                            : <li> Loading...</li> }
+                                <Title { ...entity } key={ entity._id }/>) 
+                            : <li> Loading... </li> }
                 </ul>
             </section>
         )
