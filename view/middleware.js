@@ -7,11 +7,22 @@ export const apiFactory = makeRequest => store => next => action => {
     const req = action[CALL_API]
     const { method, url, success, fail, extra } = req
     return makeRequest(url, { method })
-        .then(data => next({
-            type: success,
-            data: data,
-            extra
-        }))
+        .then(data => {
+            if (data.err) {
+                next({
+                    type: fail,
+                    code: data.code,
+                    err: data.err,
+                    extra
+                })
+            } else {
+                next({
+                    type: success,
+                    data: data,
+                    extra
+                })
+            }
+        })
         .catch(err => {
             console.log(err.stack)
             return next({

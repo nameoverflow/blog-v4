@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 
 import {
     loadYears, loadArchive, toggleTimeSect
-} from '../actions/archive'
+} from '../../actions/archive'
 
-import TimeSection from '../components/TimeSection'
+import TimeSection from '../../components/TimeSection'
 
 @connect(
     state => state.archive,

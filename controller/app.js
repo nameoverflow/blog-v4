@@ -29,7 +29,11 @@ const matchRouter = (location, routes) => {
 const makeRequest = (url, { method }) => 
     new Promise((resolve, reject) => {
         request(server._server)[method](url)
-        .end((err, res) => err ? reject(err) : resolve(res.body))
+        .end((err, res) => err ? reject(err) : resolve(res))
+    }).then(res => !res.error ? res.body : {
+        err: res.res.statusMessage,
+        code: res.statusCode,
+        url: res.res.url
     })
 
 export default function* () {
@@ -56,8 +60,9 @@ export default function* () {
             midd = applyMiddleware(apiFactory(makeRequest)),
             store = createStore(reducer, midd)
 
-        yield renderProps.components[1].fetchData(store, renderProps)
-
+        const components = renderProps.components.filter(c => c.fetchData)
+        yield Promise.all(components.map(c =>
+                            c.fetchData(store, renderProps)))
         const
             rendered = getRendered(store, renderProps),
             initial_state = JSON.stringify(store.getState())

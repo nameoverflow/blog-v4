@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { loadSingle, clearSingle } from '../actions/article'
-import ArticleView from '../components/ArticleView'
-import Comment from '../components/Comment'
+import { loadSingle, clearSingle } from '../../actions/article'
+import ArticleView from '../../components/ArticleView'
+import Comment from '../../components/Comment'
 
-import { alignScrollTop } from '../utils'
+import { alignScrollTop } from '../../utils'
 
 const stateToProp = (state, ownProps) => ({
-    data: state.single,
+    data: state.single[ownProps.params.id],
     id: ownProps.params.id
 })
 
@@ -28,18 +28,19 @@ class Single extends Component {
         super(props)
     }
     componentWillMount() {
-        if (this.props.params.id !== this.props.data._id) {
-            this.props.clear()
+        if (!this.props.data) {
             this.props.load(this.props.id)
         }
     }
     render() {
+        const { data } = this.props
+        const view = data ? <ArticleView>{ data }</ArticleView>
+                            : <div>Loading</div>
+
         return (
             <div>
-                <ArticleView>
-                    { this.props.data }
-                </ArticleView>
-                <Comment/>
+                { view }
+                <Comment />
             </div>
         )
     }

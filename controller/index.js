@@ -1,5 +1,36 @@
 import * as article from './api/article'
+import * as page from './api/page'
+
+import update from '../model/updatePost'
+
+import parseEdit from './api/edit'
 import app from './app'
+
+function *finishEdit(id, child, data) {
+    try {
+        if (child) {
+            yield update(id, data)
+        } else {
+            yield update(new_post)
+        }
+        this.send({
+            status:201,
+            headers: {
+                Location: '/admin'
+            }
+        })
+    } catch(e) {
+        console.log(e)
+        this.error(e, 500)
+    }
+}
+
+const edit = type => function *(id, child) {
+    const new_post = yield* parseEdit.call(this)
+    new_post.type = type
+    yield* finishEdit.call(this, id, child, new_post)
+}
+
 /**
  * Add routes to server
  */
@@ -24,11 +55,11 @@ export default function addRoutes(server) {
 
     api.route('/article')
         .get(article.index)
-        .post(article.edit)
+        .post(edit('article'))
 
     api.route('/article/::')
         .get(article.singleArticle)
-        .post(article.edit)
+        .post(edit('article'))
 
     api.route('/archive/::')
         .get(article.archive)
@@ -38,10 +69,11 @@ export default function addRoutes(server) {
 
 
     api.route('/page')
+        .get(page.pageList)
+        .post(edit('page'))
 
     api.route('/page/::')
-        .get()
-        .post()
-
+        .get(page.singlePage)
+        .post(edit('page'))
 }
 

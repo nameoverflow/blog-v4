@@ -15,12 +15,12 @@ const Meta = ({ tags, createDate }) =>
 
     </section>
 
-export default ({ children: { _id, title, body, createDate, tags } }) => 
+export default ({ isPage, children: { _id, title, body, createDate, tags } }) => 
     <article className='ArticleView'>
         <header className='title'>
-            <h1>{ title }</h1>
+            <h1>{ isPage ? title.toUpperCase() : title }</h1>
         </header>
         <section dangerouslySetInnerHTML={{ __html: body }} />
-        <Meta {...{ tags, createDate }} />
+        { isPage || <Meta {...{ tags, createDate }} /> }
     </article>
 

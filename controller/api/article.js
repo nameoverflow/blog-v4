@@ -1,7 +1,7 @@
 "use strict"
-import marked from 'marked'
 
 import * as article from '../../model/article'
+
 import {
     getList, getByTime, firstYear
 } from '../../model/articleList'
@@ -64,59 +64,4 @@ export function *years() {
     }
     this.send('json', list)
 }
-/**
- * Edit or create new article
- */
-export function *edit(id, child) {
-    const session = yield this.session()
-    if (!session.data.auth) {
-        return this.redirect('/login')
-    }
-    const
-        form_data = yield this.getBody(),
-        marked_string = yield getMarked(form_data.body),
-        paras = marked_string.split('<!--more-->')
 
-    let new_post = {
-        title: form_data.title,
-        body: marked_string,
-        bodySource: form_data.body,
-        summary: paras[0],
-        break: !!paras[1]
-    }
-
-    if (form_data.type) { 
-        new_post.type = form_data.type
-    }
-
-    if (form_data.tags) {
-        if (form_data.tags.slice(-1) === ';') {
-            new_post.tags = form_data.tags.slice(0, -1)
-                            .split(';').map(s => s.trim())
-        }
-    }
-    try {
-        if (id && child) {
-            yield article.update(id, new_post)
-        } else {
-            yield article.create(new_post)
-        }
-    } catch(e) {
-        console.log(e)
-        return this.error(e, 500)
-    }
-
-    this.send({
-        status:201,
-        headers: {
-            Location: '/admin'
-        }
-    })
-}
-
-function getMarked(string) {
-    return new Promise((res, rej) => {
-        marked(string,
-            (err, data) => err ? rej(err) : res(data))
-    })
-}

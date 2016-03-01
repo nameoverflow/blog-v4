@@ -1,4 +1,3 @@
-import { marked } from 'marked'
 import { post } from './db'
 
 
@@ -16,18 +15,3 @@ export function  getSource(id) {
     })
 }
 
-export function  create(data) {
-    data.type = 'article'
-    return new Promise((res, rej) => {
-        cur = new post(data)
-        data.save((err) => err ? rej(err) : res())
-    })
-}
-
-export function update(id, data) {
-    data['editDate'] = Date.now()
-    return new Promise((res, rej) => {
-        post.update({ _id: id }, data,
-            (err) => err ? rej(err) : res())
-    })
-}

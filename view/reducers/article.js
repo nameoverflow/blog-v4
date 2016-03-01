@@ -12,9 +12,7 @@ import {
 export const index = (state = [], action) => {
     switch (action.type) {
         case GET_INDEX_SUCCESS:
-            return state.concat(action.data)
-        case GET_INDEX_FAILURE:
-            return state.concat(action.err)
+            return [...state, ...action.data]
         default:
             return state
     }
@@ -23,11 +21,10 @@ export const index = (state = [], action) => {
 export const single = (state = {}, action) => {
     switch (action.type) {
         case GET_SINGLE_SUCCESS:
-            return action.data
-        case CLEAR_SINGLE:
-            return {}
-        case GET_SINGLE_FAILURE:
-            return action.err
+            const new_state = Object.assign({
+                [action.data._id]: action.data
+            }, state)
+            return new_state
         default:
             return state
     }

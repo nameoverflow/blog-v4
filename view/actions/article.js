@@ -13,8 +13,8 @@ import {
 } from '../constants'
 import { CALL_API } from '../middleware'
 
-export const loadIndex = start => {
-    const url = `${URL_ARTICLE}?start=${start}&limit=${ENTITIES_PER_PAGE}`
+export const loadIndex = (start, limit) => {
+    const url = `${URL_ARTICLE}?start=${start}&limit=${limit}`
     return {
         [CALL_API]: {
             method: 'get',

@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { loadIndex } from '../actions/article'
-import ListView from '../components/ListView'
-import { alignScrollTop } from '../utils'
+import { loadIndex } from '../../actions/article'
+import ListView from '../../components/ListView'
+import { alignScrollTop } from '../../utils'
 
 @connect(
     state => ({ loaded: state.index }),
     dispatch => ({
-        load(start) {
-            dispatch(loadIndex(start))
+        load(start, limit) {
+            dispatch(loadIndex(start, limit))
         }
     })
 )
@@ -22,7 +22,7 @@ class Index extends Component {
     componentWillMount() {
         const { loaded, load } = this.props
         if (!loaded.length) {
-            load(0)
+            load(0, 10)
         }
     }
     handleLoadMore() {
@@ -48,7 +48,7 @@ class Index extends Component {
         )
     }
     static fetchData(store) {
-        return store.dispatch(loadIndex(0))
+        return store.dispatch(loadIndex(0, 10))
     }
 }
 Index.propTypes = {

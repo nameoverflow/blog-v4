@@ -7,11 +7,6 @@ if (typeof window !== 'undefined') {
     require('./Sidebar.sass')
 }
 
-const Btn = ({ name }) =>
-    <Link to={`/${name == 'home' ? '' : name}`} className="Btn">
-       { name }
-    </Link>
-
 export default () =>
     <aside className='SideBar'>
         <section className='avatar'>
@@ -23,9 +18,16 @@ export default () =>
             <ul>
         {
             list.map(item =>
-                <li key={item}>
-                    <Btn name={item}/>
-                </li>
+                <Link
+                    key={item}
+                    to={`/${item == 'home' ? '' : item}`}
+                    className="Btn"
+                    activeClassName="active"
+                    onlyActiveOnIndex={ item == 'home' ? true : false }>
+                    <li>
+                        { item }
+                    </li>
+                </Link>
             )
         }
             </ul>

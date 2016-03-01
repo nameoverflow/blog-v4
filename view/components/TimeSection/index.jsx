@@ -38,7 +38,7 @@ export default class TimeSection extends Component {
                 theSection.style.height = origin
                 theList.style.opacity = 0
                 requestAnimationFrame(() => {
-                    theSection.style.transition = 'height 800ms ease'
+                    theSection.style.transition = 'height 500ms ease-out'
                     theSection.style.height = target
                     theList.style.opacity = 1
                     const callback = () => {

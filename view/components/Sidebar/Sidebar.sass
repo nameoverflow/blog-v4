@@ -24,14 +24,18 @@ $av_size: 130px
         line-height: 1.7em
         > ul
             padding-top: 2em
+        .Btn
+            border-bottom: none
             > li
-                border-right: 3px rgb(51,51,51) solid
+                border-right: 3px #aaa solid
                 padding-right: 1em
                 list-style: none
                 line-height: 1em
                 margin: 2rem 0
-                a
-                    border-bottom: none
+                &:hover
+                    border-right-color: #333
+            &.active > li
+                border-right-color: #333
 
 .avatar
     height: $header_height

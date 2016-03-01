@@ -14,12 +14,17 @@ import { apiFactory } from './middleware'
 import Root from './containers/Root'
 import routes from './routes'
 
-
 const makeRequest = (url, opt) => {
     const { origin } = window.location
     const real_url = origin + url
     return fetch(url, opt)
-        .then(res => res.json())
+        .then(res => 
+                res.ok ? res.json()
+                    : {
+                        err: res.statusText,
+                        code: res.status,
+                        url: res.url
+                    })
 }
 
 const
@@ -29,9 +34,8 @@ const
     history = syncHistoryWithStore(browserHistory, store)
 
 render(
-  <Root {...{ store, history }}>
-      { routes }
-  </Root>,
-  document.getElementById('client')
+    <Root {...{ store, history }}>
+        { routes }
+    </Root>,
+    document.getElementById('client')
 )
-
