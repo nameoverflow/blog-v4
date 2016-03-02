@@ -92,12 +92,19 @@ sup
             width: $cir_width_sm
             height: $cir_width_sm
 
-
+.Tags
+    margin: 0
+    padding: 7em 0 0 0
+    text-align: center
+    > li
+        list-style: none
+    a
+        border-bottom: none
 
 @media screen and (max-width: 1024px)
     .container
         @include fill-full(0, 0)
-        padding: 20em 4%
+        padding: 20em 0
         max-width: none
         width: auto
         &::before
@@ -109,7 +116,9 @@ sup
             background-color: #cdcdcd
             top: 3.5em
             margin: auto
-
+    .wrapper > *
+        margin-left: 4%
+        margin-right: 4%
 @media screen and (max-width: 450px)
     html, body
         font-size: 90%

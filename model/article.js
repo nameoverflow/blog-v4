@@ -1,17 +1,10 @@
 import { post } from './db'
+import makePromise from '../lib/makePromise'
 
+export const getBody = (id) =>
+    makePromise(post.findById(id, '-bodySource -summary'))
 
-export function getBody(id) {
-    return new Promise((res, rej) => {
-        post.findById(id, '-bodySource -summary',
-            (err, data) => err ? rej(err) : res(data))
-    })
-}
+export const getSource = (id) =>
+    makePromise(post.findById(id))
 
-export function  getSource(id) {
-    return new Promise((res, rej) => {
-        post.findById(id,
-            (err, data) => err ? rej(err) : res(data))
-    })
-}
 

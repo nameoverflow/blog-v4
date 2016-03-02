@@ -2,6 +2,7 @@ import * as article from './api/article'
 import * as page from './api/page'
 
 import update from '../model/updatePost'
+import { tagList, tagArticle } from '../model/tags'
 
 import parseEdit from './api/edit'
 import app from './app'
@@ -75,5 +76,14 @@ export default function addRoutes(server) {
     api.route('/page/::')
         .get(page.singlePage)
         .post(edit('page'))
+
+    api.route('/tags')
+        .get(function* () {
+            this.send('json', yield tagList())
+        })
+    api.route('/tags/::')
+        .get(function* (tag) {
+            this.send('json', yield tagArticle(decodeURI(tag)))
+        })
 }
 

@@ -2,11 +2,11 @@
 import eliter from 'eliter'
 import pygment from 'pygmentize-bundled'
 import marked from 'marked'
-import config from '../config'
+import config from '../config.json'
 import addRoutes from '../controller'
 import render from '../lib/render'
 
-let server = new eliter(config)
+const server = new eliter(config)
 
 server.decor(render)
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const list = ['home', 'archives', 'lab', 'about']
+const list = ['home', 'archives', 'tags', 'about']
 
 if (typeof window !== 'undefined') {
     require('./Sidebar.sass')

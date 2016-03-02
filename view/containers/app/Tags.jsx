@@ -24,7 +24,7 @@ export default class Tags extends Component {
     }
     componentWillMount() {
         const { data, load } = this.props
-        if (!data) {
+        if (!data.length) {
             load()
         }
     }
@@ -32,13 +32,13 @@ export default class Tags extends Component {
         const { data } = this.props
         return (
             !data ? <div> Loading... </div> :
-            <ul>
+            <ul className="Tags">
                 { data.map(tag =>
-                    <Link to={`/tags/${tag}`}>
-                        <li>
+                    <li>
+                        <Link to={`/tags/${tag}`}>
                             { `{ ${tag} }`}
-                        </li>
-                    </Link>) }
+                        </Link>
+                    </li>) }
             </ul>
         )
     }

@@ -7,11 +7,12 @@ import {
 
     URL_API
 } from '../constants'
+import { combineReducers } from 'redux'
 
-export const tagArticle = (state = {}, action) => {
+const tagArticle = (state = {}, action) => {
     const new_state = Object.assign({}, state)
     switch (action.type) {
-        case GET_PAGE_LIST_SUCCESS:
+        case GET_TAG_ARTICLE_SUCCESS:
             new_post[action.extra] = action.data
             return new_state
         default:
@@ -19,7 +20,7 @@ export const tagArticle = (state = {}, action) => {
     }
 }
 
-export const tags = (state = [], action) => {
+const tags = (state = [], action) => {
     switch (action.type) {
         case GET_TAGS_SUCCESS:
             return [...state, ...action.data]
@@ -28,3 +29,7 @@ export const tags = (state = [], action) => {
     }
 }
 
+export default combineReducers({
+    list: tags,
+    article: tagArticle
+})

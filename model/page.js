@@ -1,11 +1,8 @@
 import { post } from './db'
+import makePromise from '../lib/makePromise'
 
-export function getBody(title) {
-    return new Promise((res, rej) => {
-        post.findOne({ title: title },
-            (err, data) => err ? rej(err) : res(data))
-    })
-}
+export const getBody = (title) =>
+    makePromise(post.findOne({ title: title }))
 
 export function getList(start, limit) {
     return post.fetchList(start, limit, [], {

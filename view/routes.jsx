@@ -11,15 +11,14 @@ import Single from './containers/app/Single'
 import Index from './containers/app/Index'
 import Archives from './containers/app/Archives'
 import Page from './containers/app/Page'
-// import Lab from './containers/Lab'
+import Tags from './containers/app/Tags'
 
 
 export const routes = (
     <Route component={Shell} path='/'>
         <IndexRoute component={Index} name='home' />
-        {
-        // <Route path="lab" component={Lab} name='lab'/>
-        }
+        <Route path="tags/:tag" component={Tags} name='tags'/>
+        <Route path="tags" component={Tags} name='tags'/>
         <Route path="archives" component={Archives} name='archives'/>
         <Route path="article/:id" component={Single} name='article'/>
         <Route path=":title" component={Page} name='page'/>

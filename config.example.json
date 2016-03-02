@@ -1,0 +1,20 @@
+{
+    "site": {
+        "admin": {
+            "name": "fucker",
+            "passwd": "123"
+        },
+        "db": {
+            "url": "mongodb://localhost/blog"
+        }
+    },
+    "server": {
+        "port": 4000
+    },
+    "view": {
+        "path": "./view/"
+    },
+    "tpl_globals": {
+        "static_path": "/static/"
+    }
+}
