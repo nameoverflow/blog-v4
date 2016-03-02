@@ -21,8 +21,8 @@ export const loadTags = () => {
     }
 }
 
-export const loadTagArticle = tag => {
-    const url = `${URL_API}/tags/${tag}`
+export const loadTagArticle = (tag, start = 0, limit = 10) => {
+    const url = `${URL_API}/tags/${tag}?start=${start}&limit=${limit}`
     return {
         [CALL_API]: {
             method: 'get',

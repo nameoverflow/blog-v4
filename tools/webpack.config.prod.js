@@ -1,10 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
-var webpack_module = require('./webpack.module')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var root_path = path.join(__dirname, '..')
 var view_src = path.join(root_path, 'view')
+var babel_loader = 'babel?presets[]=react,presets[]=es2015,plugins[]=transform-async-to-generator,plugins[]=transform-decorators-legacy'
 
 module.exports = {
   entry: {
@@ -17,7 +17,29 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('bundle.css')
   ],
-  module: webpack_module,
+  module: {
+    loaders: [{
+      test: /\.jsx$/,
+      loaders: [babel_loader],
+      include: path.join(__dirname, '../view')
+    }, {
+      test: /\.js$/,
+      loaders: [babel_loader],
+      include: path.join(__dirname, '../view')
+    }, {
+      test: /\.sass$/,
+      loader: ExtractTextPlugin.extract("style", ["css", "sass?indentedSyntax"])
+    }, {
+      test: /\.s?css$/,
+      loader: ExtractTextPlugin.extract("style", ["css", "sass"])
+    }, {
+      test: /\.png$/,
+      loader: "url?limit=100000"
+    }, {
+      test: /\.(jpg|svg)$/,
+      loader: "file?name=[name].[ext]"
+    }]
+  },
   resolve: {
     extensions: ['.js', '.jsx', '']
   }

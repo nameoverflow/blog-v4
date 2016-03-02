@@ -14,6 +14,7 @@ new WebpackDevServer(webpack(dev_config), {
       "/lab": "http://127.0.0.1:4000",
       "/about": "http://127.0.0.1:4000",
       "/article*": "http://127.0.0.1:4000",
+      "/tags*": "http://127.0.0.1:4000",
       "/api*": "http://127.0.0.1:4000",
       "/static/img*": "http://127.0.0.1:4000"
   }

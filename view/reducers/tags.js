@@ -13,7 +13,7 @@ const tagArticle = (state = {}, action) => {
     const new_state = Object.assign({}, state)
     switch (action.type) {
         case GET_TAG_ARTICLE_SUCCESS:
-            new_post[action.extra] = action.data
+            new_state[action.extra] = [...(state[action.extra] || []), ...action.data]
             return new_state
         default:
             return state

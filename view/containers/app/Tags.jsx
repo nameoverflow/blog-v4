@@ -3,46 +3,29 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 import { loadTags } from '../../actions/tags'
+import PageTitle from '../../components/PageTitle'
 
-import { alignScrollTop } from '../../utils'
+import { loadDataOnEnter } from '../../utils'
 
-const stateToProp = (state, ownProps) => ({
-    data: state.tags.list
-})
-
-const dispToProp = dispatch => ({
-    load() {
-        dispatch(loadTags())
-    }
-})
-
-@connect(stateToProp, dispToProp)
-@alignScrollTop
+@loadDataOnEnter(
+    loadTags,
+    props => undefined,
+    state => state.tags.list,
+    data => !data.length)
 export default class Tags extends Component {
-    constructor(props) {
-        super(props)
-    }
-    componentWillMount() {
-        const { data, load } = this.props
-        if (!data.length) {
-            load()
-        }
-    }
     render() {
         const { data } = this.props
         return (
             !data ? <div> Loading... </div> :
             <ul className="Tags">
+                <PageTitle>TAGS</PageTitle>
                 { data.map(tag =>
-                    <li>
+                    <li key={ tag }>
                         <Link to={`/tags/${tag}`}>
                             { `{ ${tag} }`}
                         </Link>
                     </li>) }
             </ul>
         )
-    }
-    static fetchData(store, props) {
-        return store.dispatch(loadTags())
     }
 }

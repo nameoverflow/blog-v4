@@ -1,47 +1,24 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import ArticleView from '../../components/ArticleView'
+
+import ContentView from '../../components/ContentView'
 
 import { loadPage } from '../../actions/page'
 
-import { alignScrollTop } from '../../utils'
+import { loadDataOnEnter } from '../../utils'
 
-const stateToProp = (state, ownProps) => ({
-    data: state.page[ownProps.params.title],
-    title: ownProps.params.title
-})
 
-const dispToProp = dispatch => ({
-    load(title) {
-        dispatch(loadPage(title))
-    }
-})
-
-@connect(stateToProp, dispToProp)
-@alignScrollTop
+@loadDataOnEnter(
+    loadPage,
+    props => props.params.title,
+    (state, ident) => state.page[ident],
+    data => !data)
 export default class Page extends Component {
-    constructor(props) {
-        super(props)
-    }
-    componentWillMount() {
-        const { data, title, load } = this.props
-        if (!data) {
-            load(title)
-        }
-    }
     render() {
-        const data = this.props.data
-        const view = data ?
-                        <ArticleView isPage={ true }>{ data }</ArticleView>
-                        : <div>Loading</div>
+        const { data } = this.props
         return (
-            !data ? <div> Loading... </div> :
             <div>
-                { view }
+                <ContentView isPage={ true }>{ data }</ContentView>
             </div>
         )
-    }
-    static fetchData(store, props) {
-        return store.dispatch(loadPage(props.params.title))
     }
 }

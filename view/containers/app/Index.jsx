@@ -39,7 +39,8 @@ class Index extends Component {
             </li>
         )) : <li> LOADING </li>
 
-        const tail = <li onClick={this.handleLoadMore}>LOAD MORE</li>
+        const tail = <li onClick={this.handleLoadMore}
+                        style={{ textAlign: 'center' }}>LOAD MORE</li>
         return (
             <ul className='Index'>
                 { view }
