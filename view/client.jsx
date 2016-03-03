@@ -5,7 +5,7 @@ import { render } from 'react-dom'
 
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import { Router, browserHistory } from 'react-router'
+import { Router, browserHistory, match } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import reducer from './reducers'
@@ -13,6 +13,8 @@ import { apiFactory } from './middleware'
 
 import Root from './containers/Root'
 import routes from './routes'
+
+import { scrollLoaderBundle } from './utils'
 
 const makeRequest = (url, opt) => {
     const { origin } = window.location
@@ -33,9 +35,21 @@ const
     store = createStore(reducer, initial_state, middleware),
     history = syncHistoryWithStore(browserHistory, store)
 
-render(
-    <Root {...{ store, history }}>
-        { routes }
-    </Root>,
-    document.getElementById('client')
-)
+match({ history, routes }, (error, redirectLocation, renderProps) => {
+    renderProps.components
+        .filter(c => c.scrollLoad)
+        .map(c => {
+            console.log('binded', c.scrollLoad)
+            scrollLoaderBundle.bind(() => c.scrollLoad(store))
+        })
+    render(
+        <Root {...{ store, renderProps }} />,
+        document.getElementById('client')
+    )
+})
+// render(
+//     <Root {...{ store, history }}>
+//         { routes }
+//     </Root>,
+//     document.getElementById('client')
+// )

@@ -6,6 +6,15 @@ import { page, pageList } from './page'
 import archive from './archive'
 import tags from './tags'
 
+// const scroll = (state = null, action) => {
+//     switch (action.type) {
+//         case CHANGE_SCROLL_BEHAVIOR:
+//             return action.handler
+//         default:
+//             return state
+//     }
+// }
+
 export default combineReducers({
     index,
     single,
@@ -13,5 +22,6 @@ export default combineReducers({
     page,
     pageList,
     tags,
+    // scroll,
     routing
 })

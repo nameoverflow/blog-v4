@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import { findDOMNode } from 'react-dom'
+
 import { connect } from 'react-redux'
 
 export const loadDataOnEnter = (loadAction, getDataIdent, getState, isEmpty) =>
@@ -40,14 +42,48 @@ export const alignScrollTop = (ComposedComponent) => {
             super(props)
         }
         componentDidMount() {
-            window.scroll(0, 0)
+            findDOMNode(this).scrollIntoView()
         }
         render() {
             return <ComposedComponent { ...this.props } />
         }
     }
     autoAlign.fetchData = ComposedComponent.fetchData
+    autoAlign.scrollLoad = ComposedComponent.scrollLoad
     return autoAlign
+}
+
+export const scrollLoaderBundle = {
+    bind(handler, dis_to_bottom = 300) {
+        if (this.__scHandler) {
+            this.remove()
+        }
+        const d = document
+        const dd = document.documentElement
+        const db = document.body
+        const getScrollTop = () => dd && dd.scrollTop ? dd.scrollTop : db.scrollTop
+        const getClientHeight = () => {
+            if (db.clientHeight && dd.clientHeight) {
+                return Math.min(db.clientHeight, dd.clientHeight)
+            } else {
+                return db.clientHeight || dd.clientHeight
+            }
+        }
+        this.__scHandler = function (e) {
+            const scrollTop = getScrollTop()
+            const clientHeight = getClientHeight()
+            const scrollHeight = Math.max(db.scrollHeight, dd.scrollHeight)
+            if (scrollTop + clientHeight + dis_to_bottom > scrollHeight
+                && !this.isLoading) {
+                this.isLoading = true
+                handler().then(() => this.isLoading = false)
+            }
+        }
+        window.addEventListener('scroll', this.__scHandler)
+    },
+    remove() {
+        window.removeEventListener('scroll', this.__scHandler)
+    }
 }
 
 export const formatTime = (function() {

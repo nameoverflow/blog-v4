@@ -7,5 +7,5 @@ view.ai
 *.swp
 .idea/
 tmp/
-config.js
+config.json
 npm-debug.log

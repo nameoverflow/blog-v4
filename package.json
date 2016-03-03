@@ -1,5 +1,5 @@
 {
-  "name": "hcyue.me",
+  "name": "blog-v4",
   "version": "1.0.0",
   "description": "blog",
   "main": "index.js",
@@ -7,7 +7,8 @@
     "test": "mocha",
     "start": "node tools/starter",
     "dev": "node tools/devServer.js",
-    "deploy": "webpack -p --config ./tools/webpack.config.prod.js"
+    "deploy": "webpack -p --config ./tools/webpack.config.prod.js",
+    "forever": "forever start tools/starter"
   },
   "author": "hcyue",
   "license": "MIT",

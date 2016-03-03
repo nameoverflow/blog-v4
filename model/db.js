@@ -7,7 +7,7 @@ const { site: { db: conf } } = _conf
 let db = mongo.connection
 
 db.on('error', (err) => {
-    console.log(`Mongoose connection error: ${err}`)
+    throw new Error(`Mongoose connection error: ${err}`)
 })
 
 db.on('connnected', () => {
@@ -65,7 +65,7 @@ post.fetchList = function (start, limit, field, conditions) {
         },
         fields = ['_id', 'title', 'tags', 'createDate'].concat(field).join(' ')
     let cur = post.find(cond)
-        .sort({ createDate: -1})
+        .sort({ createDate: -1 })
         .select(fields)
         .skip(start)
         .limit(limit)

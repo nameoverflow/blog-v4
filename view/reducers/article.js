@@ -9,10 +9,13 @@ import {
 
 } from '../constants'
 
-export const index = (state = [], action) => {
+export const index = (state = { list: [], end: false }, action) => {
     switch (action.type) {
         case GET_INDEX_SUCCESS:
-            return [...state, ...action.data]
+            return {
+                list: [...state.list, ...action.data],
+                end: !action.data.length
+            }
         default:
             return state
     }

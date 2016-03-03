@@ -1,5 +1,6 @@
 "use strict"
 require("babel-register")
-let server = require('./initServer').default
+const conf = require('../config')
+const server = require('./initServer').default
 
-server.start(4000)
+server.start(conf.server.port)

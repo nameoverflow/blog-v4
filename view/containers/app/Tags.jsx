@@ -22,7 +22,7 @@ export default class Tags extends Component {
                 { data.map(tag =>
                     <li key={ tag }>
                         <Link to={`/tags/${tag}`}>
-                            { `{ ${tag} }`}
+                            { `{ ${tag}  }`}
                         </Link>
                     </li>) }
             </ul>

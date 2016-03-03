@@ -3,13 +3,12 @@ import { connect } from 'react-redux'
 
 import { loadIndex } from '../../actions/article'
 import ListView from '../../components/ListView'
-import { alignScrollTop } from '../../utils'
-
+import { alignScrollTop, scrollLoaderBundle } from '../../utils'
 @connect(
     state => ({ loaded: state.index }),
     dispatch => ({
         load(start, limit) {
-            dispatch(loadIndex(start, limit))
+            return dispatch(loadIndex(start, limit))
         }
     })
 )
@@ -21,15 +20,27 @@ class Index extends Component {
     }
     componentWillMount() {
         const { loaded, load } = this.props
-        if (!loaded.length) {
+        if (!loaded.list.length) {
             load(0, 10)
         }
     }
+    componentDidMount() {
+        scrollLoaderBundle.bind(this.handleLoadMore)
+    }
+    componentWillReceiveProps(nextProps) {
+        const { end } = nextProps.loaded
+        if (end) {
+            scrollLoaderBundle.remove()
+        }
+    }
+    componentWillUnmount() {
+        scrollLoaderBundle.remove()
+    }
     handleLoadMore() {
-        this.props.load(this.props.loaded.length + 1)
+        return this.props.load(this.props.loaded.list.length)
     }
     render() {
-        const list = this.props.loaded
+        const list = this.props.loaded.list
 
         const view = list.length ? list.map(v => (
             <li key={ v._id }>
@@ -50,6 +61,10 @@ class Index extends Component {
     }
     static fetchData(store) {
         return store.dispatch(loadIndex(0, 10))
+    }
+    static scrollLoad(store) {
+        const start = store.getState().index.length
+        return store.dispatch(loadIndex(start, 10))
     }
 }
 Index.propTypes = {
