@@ -30,7 +30,7 @@ export default ({ children: entity }) => {
                 </h1>
                 <Meta {...{ tags, createDate }} />
             </header>
-            <main dangerouslySetInnerHTML={{ __html: summary || body }} />
+            <div dangerouslySetInnerHTML={{ __html: summary || body }} />
             <div className="more-link" style={{
                 'display': entity.break ? 'block' : 'none'
             }}>

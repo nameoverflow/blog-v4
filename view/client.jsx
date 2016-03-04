@@ -37,7 +37,7 @@ const
 
 match({ history, routes }, (error, redirectLocation, renderProps) => {
     renderProps.components
-        .filter(c => c.scrollLoad)
+        .filter(c => c && c.scrollLoad)
         .map(c => {
             console.log('binded', c.scrollLoad)
             scrollLoaderBundle.bind(() => c.scrollLoad(store))

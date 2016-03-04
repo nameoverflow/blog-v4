@@ -3,21 +3,11 @@ import { Link } from 'react-router'
 
 import TagList from '../TagList'
 import Time from '../Time'
+import Title from '../Title'
 
 if (typeof window !== 'undefined') {
     require('./TimeSection.sass')
 }
-
-const Title = ({ tags, title, _id, createDate }) =>
-    <li>
-        <Link to={`/article/${_id}`}>
-            <h2> { title } </h2>
-        </Link>
-        <div className='ListMeta'>
-            <Time {...{ createDate }} />
-            { tags && tags[0] ? [' |', ...TagList(tags)] : [] }
-        </div>
-    </li>
 
 export default class TimeSection extends Component {
     constructor(props) {

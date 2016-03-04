@@ -28,8 +28,8 @@ export default function *parseEdit() {
     if (form_data.tags) {
         if (form_data.tags.slice(-1) === ';') {
             new_post.tags = form_data.tags.slice(0, -1)
-                            .split(';').map(s => s.trim())
         }
+        new_post.tags = new_post.tags.split(';').map(s => s.trim())
     }
 
     return new_post

@@ -35,7 +35,6 @@ export default class TagArticle extends Component {
     }
     render() {
         const list = this.props.data
-        console.log(list && list.length)
         const view = list && list.length ? list.map(v => (
             <li key={ v._id }>
                 <ListView>

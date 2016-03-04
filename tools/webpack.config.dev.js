@@ -15,6 +15,11 @@ module.exports = {
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     path.join(view_src, 'client.jsx')
+    ],
+    admin: [
+    'webpack-dev-server/admin?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    path.join(view_src, 'admin.jsx')
     ]
   },
   output: {

@@ -10,15 +10,9 @@ import TimeSection from '../../components/TimeSection'
 @connect(
     state => state.archive,
     dispatch => ({
-        loadYears() {
-            return dispatch(loadYears())
-        },
-        loadArchive(time) {
-            return dispatch(loadArchive(time))
-        },
-        toggleTimeSect(time) {
-            return dispatch(toggleTimeSect(time))
-        }
+        loadYears: () => dispatch(loadYears()),
+        loadArchive: time => dispatch(loadArchive(time)),
+        toggleTimeSect: time => dispatch(toggleTimeSect(time))
     })
 )
 export default class Archives extends Component {

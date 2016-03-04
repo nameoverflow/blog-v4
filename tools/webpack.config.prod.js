@@ -9,6 +9,7 @@ var babel_loader = 'babel?presets[]=react,presets[]=es2015,plugins[]=transform-a
 module.exports = {
   entry: {
     client: path.join(view_src, 'client.jsx'),
+    admin: path.join(view_src, 'admin.jsx')
   },
   output: {
     path: path.join(root_path, 'public'),

@@ -19,7 +19,7 @@ export default ({ isPage, children }) => {
     if (!children) {
         return <div>Loading</div>
     }
-    const { _id, title, body, createDate, tags } = children
+    const { title, body, createDate, tags } = children
     return (
         <article className='ContentView'>
             <Title {...{ isPage }}>{ title }</Title>

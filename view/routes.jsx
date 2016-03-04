@@ -16,7 +16,7 @@ import TagArticle from './containers/app/TagArticle'
 
 export const routes = (
     <Route component={Shell} path='/'>
-        <IndexRoute component={Index} name='home' />
+        <IndexRoute component={Index} name='home'/>
         <Route path="tags" component={Tags} name='tags'/>
         <Route path="tags/:tag" component={TagArticle} name='tagArticle'/>
         <Route path="archives" component={Archives} name='archives'/>

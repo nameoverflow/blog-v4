@@ -60,7 +60,7 @@ export default function* () {
             midd = applyMiddleware(apiFactory(makeRequest)),
             store = createStore(reducer, midd)
 
-        const components = renderProps.components.filter(c => c.fetchData)
+        const components = renderProps.components.filter(c => c && c.fetchData)
         yield Promise.all(components.map(c =>
                             c.fetchData(store, renderProps)))
         const
