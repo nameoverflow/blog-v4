@@ -14,7 +14,7 @@ import {
 import { CALL_API } from '../middleware'
 
 export const loadIndex = (start, limit) => {
-    const url = `${URL_ARTICLE}?start=${start}&limit=${limit}`
+    const url = `${URL_ARTICLE}?start=${start}&limit=${limit}&summary&break`
     return {
         [CALL_API]: {
             method: 'get',

@@ -2,14 +2,13 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-import Sidebar from '../../components/Sidebar'
-
 if (typeof window !== 'undefined') {
     require('../../assert/normalize.css')
     require('./Shell.sass')
     require('../../assert/github.css')
 }
 
+import Sidebar from '../../components/Sidebar'
 
 export default ({ children, location }) => {
     return (
@@ -17,11 +16,11 @@ export default ({ children, location }) => {
             <Sidebar/>
             <main className='container'>
                 <ReactCSSTransitionGroup
-                  component="div"
-                  className="wrapper"
-                  transitionName="route-trans"
-                  transitionEnterTimeout={800}
-                  transitionLeaveTimeout={800}
+                    component="div"
+                    className="wrapper"
+                    transitionName="route-trans"
+                    transitionEnterTimeout={800}
+                    transitionLeaveTimeout={800}
                 >{
                     React.cloneElement(children, {
                         key: location.pathname

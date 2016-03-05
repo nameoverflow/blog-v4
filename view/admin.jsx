@@ -11,7 +11,10 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import reducer from './reducers'
 import { apiFactory } from './middleware'
 
-import Root from './containers/Root'
+import Dashboard from './containers/admin/Dashboard'
+import Profile from './containers/admin/Profile'
+import Edit from './containers/admin/Edit'
+import Login from './containers/admin/Login'
 
 import { scrollLoaderBundle } from './utils'
 
@@ -21,7 +24,7 @@ const routes = (
         <Route path="page" component={Profile} name="page"/>
         <Route path="new" component={Edit} name='new'/>
         <Route path="edit/:id" component={Edit} name="edit"/>
-        <Route path="login" component=={Login} name="Login"/>
+        <Route path="login" component={Login} name="Login"/>
     </Route>
 )
 

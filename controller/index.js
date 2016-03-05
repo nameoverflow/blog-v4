@@ -55,11 +55,11 @@ export default function addRoutes(server) {
     })
 
     api.route('/article')
-        .get(article.index)
+        .get(article.list)
         .post(edit('article'))
 
     api.route('/article/::')
-        .get(article.singleArticle)
+        .get(article.single)
         .post(edit('article'))
 
     api.route('/archive/::')

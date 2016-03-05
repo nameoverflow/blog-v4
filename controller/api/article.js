@@ -16,34 +16,39 @@ import {
 /**
  * Get single article by `_id`
  */
-export function *singleArticle(id) {
-    const data = yield article.getBody(id)
+export function *single(id) {
+    const { source } = this.query
+    const data = yield this.query ? article.getSource(id) : article.getBody(id)
     this.send('json', data)
 }
 
 /**
- * Get index with summary
+ * Get list with fields in query
  */
-export function *index() {
+export function *list() {
     const
         start = +this.query['start'] || 0,
         limit = +this.query['limit'] || 5,
-        list = yield getList(start, limit, ['summary', 'break'])
+
+        fields = ['summary', 'break', 'body', 'bodySource'].filter(
+                    v => this.query.hasOwnProperty(v)),
+
+        list = yield getList(start, limit, fields)
 
     this.send('json', list)
 }
 
-/**
- * Get list with only title and time
- */
-export function *titles() {
-    const
-        start = +this.query['start'] || 0,
-        limit = +this.query['limit'] || 5,
-        list = yield getList(start, limit)
+// /**
+//  * Get list with only title and time
+//  */
+// export function *titles() {
+//     const
+//         start = +this.query['start'] || 0,
+//         limit = +this.query['limit'] || 5,
+//         list = yield getList(start, limit)
 
-    this.send('json', list)
-}
+//     this.send('json', list)
+// }
 
 /**
  * Get archive by time

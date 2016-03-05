@@ -4,7 +4,7 @@ import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 
 export const loadDataOnEnter = (loadAction, getDataIdent, getState, isEmpty) =>
-    (ComposedComponent) => {
+    ComposedComponent => {
         const stateToProp = (state, ownProps) => ({
             data: getState(state, getDataIdent(ownProps))
         })
@@ -17,26 +17,22 @@ export const loadDataOnEnter = (loadAction, getDataIdent, getState, isEmpty) =>
         @connect(stateToProp, dispToProp)
         @alignScrollTop
         class PageShell extends Component {
-            constructor(props) {
-                super(props)
-            }
             componentWillMount() {
                 if (isEmpty(this.props.data)) {
                     this.props.load(getDataIdent(this.props))
                 }
             }
             render() {
-                return <ComposedComponent { ...this.props }></ComposedComponent>
+                return <ComposedComponent { ...this.props } />
             }
             static fetchData(store, props) {
-                console.log(getDataIdent(props))
                 return store.dispatch(loadAction(getDataIdent(props)))
             }
         }
         return PageShell
     }
 
-export const alignScrollTop = (ComposedComponent) => {
+export const alignScrollTop = ComposedComponent => {
     class autoAlign extends Component {
         constructor(props) {
             super(props)
@@ -59,8 +55,8 @@ export const scrollLoaderBundle = {
             this.remove()
         }
         const d = document
-        const dd = document.documentElement
-        const db = document.body
+        const dd = d.documentElement
+        const db = d.body
         const getScrollTop = () => dd && dd.scrollTop ? dd.scrollTop : db.scrollTop
         const getClientHeight = () => {
             if (db.clientHeight && dd.clientHeight) {
@@ -74,9 +70,9 @@ export const scrollLoaderBundle = {
             const clientHeight = getClientHeight()
             const scrollHeight = Math.max(db.scrollHeight, dd.scrollHeight)
             if (scrollTop + clientHeight + dis_to_bottom > scrollHeight
-                && !this.isLoading) {
-                this.isLoading = true
-                handler().then(() => this.isLoading = false)
+                && !this.isActive) {
+                this.isActive = true
+                handler().then(() => this.isActive = false)
             }
         }
         window.addEventListener('scroll', this.__scHandler)

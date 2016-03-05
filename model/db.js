@@ -68,7 +68,9 @@ post.fetchList = function (start, limit, field, conditions) {
         .sort({ createDate: -1 })
         .select(fields)
         .skip(start)
-        .limit(limit)
+    if (limit) {
+        cur.limit(limit)
+    }
     return new Promise((res, rej) => {
         cur.exec((err, data) => err ? rej(err) : res(data))
     })
