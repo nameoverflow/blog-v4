@@ -17,8 +17,8 @@ import {
  * Get single article by `_id`
  */
 export function *single(id) {
-    const { source } = this.query
-    const data = yield this.query ? article.getSource(id) : article.getBody(id)
+    const source = this.query && this.query.source
+    const data = yield this.query && this.query.hasOwnProperty('source') ? article.getSource(id) : article.getBody(id)
     this.send('json', data)
 }
 
