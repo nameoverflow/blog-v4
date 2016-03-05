@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+import Time from '../Time'
+import TagList from '../TagList'
 export default ({ tags, title, _id, createDate }) =>
     <li>
         <Link to={`/article/${_id}`}>
