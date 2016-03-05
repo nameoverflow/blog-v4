@@ -16,7 +16,10 @@ module.exports = {
     filename: '[name].js'
   },
   plugins: [
-    new ExtractTextPlugin('bundle.css')
+    new ExtractTextPlugin('bundle.css'),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"development"'
+    })
   ],
   module: {
     loaders: [{
