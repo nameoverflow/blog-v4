@@ -10,6 +10,9 @@ if (typeof window !== 'undefined') {
     require('./TimeSection.sass')
 }
 
+/**
+ * Using `this.state` there for better animation performance
+ */
 export default class TimeSection extends Component {
     constructor(props) {
         super(props)

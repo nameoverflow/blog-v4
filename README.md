@@ -2,4 +2,4 @@
 
 Building.
 
-[Preview](http://new.hcyue.me)
+[Preview](http://hcyue.me)

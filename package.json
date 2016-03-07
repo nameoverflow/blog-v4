@@ -7,7 +7,7 @@
     "test": "mocha",
     "start": "node tools/starter",
     "dev": "node tools/devServer.js",
-    "deploy": "NODE_ENV=production webpack -p --config ./tools/webpack.config.prod.js",
+    "deploy": "NODE_ENV=production ./node_modules/.bin/webpack -p --config ./tools/webpack.config.prod.js",
     "forever": "forever start tools/starter"
   },
   "author": "hcyue",
