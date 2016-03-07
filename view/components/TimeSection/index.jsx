@@ -14,6 +14,14 @@ export default class TimeSection extends Component {
     constructor(props) {
         super(props)
         this.styles = ['none', 'block']
+        this.state = {
+            show: false
+        }
+    }
+    toggle() {
+        this.setState({
+            show: !this.state.show
+        })
     }
     getHeight() {
         const { theSection } = this.refs
@@ -49,12 +57,12 @@ export default class TimeSection extends Component {
     handleClick(e) {
         const { display, toggle, data, load, time } = this.props
         const { theSection } = this.refs
-        if (display) {
-            return void(toggle(time))
+        if (this.state.show) {
+            return void(this.toggle(time))
         }
         const height = this.getHeight()
         theSection.style.height = height
-        toggle(time)
+        this.toggle(time)
         this.transHeight(height).then(() => {
             if (!(data && data.length)) {
                 const height = this.getHeight()
@@ -66,13 +74,14 @@ export default class TimeSection extends Component {
 
     }
     render() {
-        const { display, toggle, data, load, time } = this.props
+        const { display, data, load, time } = this.props
+        const { show } = this.state
         return (
             <section className='TimeSection' ref='theSection'>
                 <h1 onClick={ (e) => this.handleClick(e) }>
                     { time }
                 </h1>
-                <ul ref='theList' style={{ display: this.styles[+display] }}>
+                <ul ref='theList' style={{ display: this.styles[+show] }}>
                     { data ? data.map(entity => 
                                 <Title { ...entity } key={ entity._id }/>)
                             : <LoadingAnimation /> }

@@ -11,8 +11,7 @@ import TimeSection from '../../components/TimeSection'
     state => state.archive,
     dispatch => ({
         loadYears: () => dispatch(loadYears()),
-        loadArchive: time => dispatch(loadArchive(time)),
-        toggleTimeSect: time => dispatch(toggleTimeSect(time))
+        loadArchive: time => dispatch(loadArchive(time))
     })
 )
 export default class Archives extends Component {
@@ -27,7 +26,6 @@ export default class Archives extends Component {
                 time = { time }
                 load = { props.loadArchive }
                 data = { props.data[time] }
-                display = { props.display[time] || false }
                 toggle = { props.toggleTimeSect } /> )
 
         return <div className="Archives"> { list } </div>
