@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import TagList from '../TagList'
 import Time from '../Time'
 import Title from '../Title'
+import LoadingAnimation from '../LoadingAnimation'
 
 if (typeof window !== 'undefined') {
     require('./TimeSection.sass')
@@ -50,18 +51,18 @@ export default class TimeSection extends Component {
             toggle(time)
             return
         }
-        if (!(data && data.length)) {
-            toggle(time)
-            const height = this.getHeight()
-            load(time).then(() => {
-                this.transHeight(height)
-            })
-        } else {
-            const height = this.getHeight()
-            theSection.style.height = height
-            toggle(time)
-            this.transHeight(height)
-        }
+        const height = this.getHeight()
+        theSection.style.height = height
+        toggle(time)
+        this.transHeight(height).then(() => {
+            if (!(data && data.length)) {
+                const height = this.getHeight()
+                load(time).then(() => {
+                    this.transHeight(height)
+                })
+            }
+        })
+
     }
     render() {
         const { display, toggle, data, load, time } = this.props
@@ -72,8 +73,8 @@ export default class TimeSection extends Component {
                 </h1>
                 <ul ref='theList' style={{ display: this.styles[+display] }}>
                     { data ? data.map(entity => 
-                                <Title { ...entity } key={ entity._id }/>) 
-                            : <li> Loading... </li> }
+                                <Title { ...entity } key={ entity._id }/>)
+                            : <LoadingAnimation /> }
                 </ul>
             </section>
         )

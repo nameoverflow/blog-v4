@@ -29,7 +29,10 @@ export const loadTagArticle = (tag, start = 0, limit = 10) => {
             url: url,
             success: GET_TAG_ARTICLE_SUCCESS,
             fail: GET_TAG_ARTICLE_FAILURE,
-            extra: tag
+            extra: {
+                tagName: tag,
+                expCount: 10
+            }
         }
     }
 }

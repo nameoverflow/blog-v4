@@ -1,0 +1,26 @@
+$h_min: 40px
+$color: #999
+@keyframes loading
+    0%
+        transform: scaleY(1)
+    100%
+        transform: scaleY(0.2)
+
+.LoadingAnimation
+    width: 100%
+    text-align: center
+    div
+        display: inline-block
+        width: 3px
+        height: 15px
+        margin: 0 3px
+        background-color: $color
+        transform-origin: 50% 50%
+        @for $i from 1 through 3
+            &:nth-child(#{$i})
+                animation: loading 0.3s linear (0.1s * $i) infinite alternate
+    &::after
+        display: block
+        content: 'Loading'
+        color: $color
+        font-size: 80%

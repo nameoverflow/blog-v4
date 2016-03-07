@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import { loadIndex } from '../../actions/article'
 import ListView from '../../components/ListView'
+import ListTail from '../../components/ListTail'
+
 import { alignScrollTop, scrollLoaderBundle } from '../../utils'
 @connect(
     state => ({ loaded: state.index }),
@@ -40,7 +42,7 @@ class Index extends Component {
         return this.props.load(this.props.loaded.list.length)
     }
     render() {
-        const list = this.props.loaded.list
+        const { list, end } = this.props.loaded
 
         const view = list.length ? list.map(v => (
             <li key={ v._id }>
@@ -55,7 +57,7 @@ class Index extends Component {
         return (
             <ul className='Index'>
                 { view }
-                { list.length && tail }
+                <ListTail text={ end ? 'End' : 'LOADING' } />
             </ul>
         )
     }

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import ListView from '../../components/ListView'
+import ListTail from '../../components/ListTail'
 
 import { loadTagArticle } from '../../actions/tags'
 
@@ -34,7 +35,8 @@ export default class TagArticle extends Component {
         this.props.load(this.props.tag, this.props.data.length + 1)
     }
     render() {
-        const list = this.props.data
+        const data = this.props.data || {}
+        const { list, end } = data
         const view = list && list.length ? list.map(v => (
             <li key={ v._id }>
                 <ListView>
@@ -43,12 +45,10 @@ export default class TagArticle extends Component {
             </li>
         )) : <li> LOADING </li>
 
-        const tail = <li onClick={this.handleLoadMore}
-                        style={{ textAlign: 'center' }}>LOAD MORE</li>
         return (
             <ul className='TagArticle'>
                 { view }
-                { list && tail }
+                <ListTail text={ end ? 'End' : 'LOADING' } />
             </ul>
         )
     }

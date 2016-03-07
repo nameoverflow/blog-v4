@@ -10,11 +10,14 @@ import {
 import { combineReducers } from 'redux'
 
 const tagArticle = (state = {}, action) => {
-    const new_state = Object.assign({}, state)
     switch (action.type) {
         case GET_TAG_ARTICLE_SUCCESS:
-            new_state[action.extra] = [...(state[action.extra] || []), ...action.data]
-            return new_state
+            const ns = Object.assign({}, state)
+            const ident = action.extra.tagName
+            ns[ident] = ns[ident] || { list: [], end: false }
+            ns[ident].list = [...ns[ident].list, ...action.data]
+            ns[ident].end = action.data.length < action.extra.expCount
+            return ns
         default:
             return state
     }

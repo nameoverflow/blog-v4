@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom'
 
 import { connect } from 'react-redux'
 
+import LoadingAnimation from './components/LoadingAnimation'
 export const loadDataOnEnter = (loadAction, getDataIdent, getState, isEmpty) =>
     ComposedComponent => {
         const stateToProp = (state, ownProps) => ({
