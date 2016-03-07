@@ -5,54 +5,52 @@ import ListTail from '../../components/ListTail'
 
 import { loadTagArticle } from '../../actions/tags'
 
-import { alignScrollTop } from '../../utils'
+import { scrollLoaderBundle, loadDataOnEnter } from '../../utils'
 
-const stateToProp = (state, ownProps) => ({
-    data: state.tags.article[ownProps.params.tag],
-    tag: ownProps.params.tag
-})
 
-const dispToProp = dispatch => ({
-    load(tag) {
-        dispatch(loadTagArticle(tag))
-    }
-})
 
-@connect(stateToProp, dispToProp)
-@alignScrollTop
+@loadDataOnEnter(
+    loadTagArticle,
+    props => props.params.tag,
+    (state, ident) => state.tags.article[ident],
+    data => !data || !data.list.length)
 export default class TagArticle extends Component {
-    constructor(props) {
-        super(props)
-        this.handleLoadMore = this.handleLoadMore.bind(this)
-    }
-    componentWillMount() {
-        const { data, load } = this.props
-        if (!data || !data.length) {
-            load(this.props.tag)
+    componentWillReceiveProps(nextProps) {
+        const { end } = nextProps.data
+        if (end) {
+            scrollLoaderBundle.remove()
         }
     }
+    componentDidMount() {
+        scrollLoaderBundle.bind(() => this.handleLoadMore())
+    }
     handleLoadMore() {
-        this.props.load(this.props.tag, this.props.data.length + 1)
+        this.props.load(this.props.params.tag, this.props.data.length)
+    }
+    componentWillUnmount() {
+        scrollLoaderBundle.remove()
     }
     render() {
         const data = this.props.data || {}
         const { list, end } = data
-        const view = list && list.length ? list.map(v => (
+        const view = list && list.map(v => 
             <li key={ v._id }>
                 <ListView>
                     { v }
                 </ListView>
             </li>
-        )) : <li> LOADING </li>
+        )
 
         return (
             <ul className='TagArticle'>
                 { view }
-                <ListTail text={ end ? 'End' : 'LOADING' } />
+                <ListTail isEnd={ end } />
             </ul>
         )
     }
-    static fetchData(store) {
-        return store.dispatch(loadTagArticle(0, 10))
+    static scrollLoad(store, props) {
+        const data = store.getState().tags.article[props.params.tag]
+        const start = data.list && data.list.length
+        return store.dispatch(loadTagArticle(props.params.tag, start))
     }
 }

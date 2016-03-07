@@ -3,7 +3,6 @@ import { findDOMNode } from 'react-dom'
 
 import { connect } from 'react-redux'
 
-import LoadingAnimation from './components/LoadingAnimation'
 export const loadDataOnEnter = (loadAction, getDataIdent, getState, isEmpty) =>
     ComposedComponent => {
         const stateToProp = (state, ownProps) => ({
@@ -11,8 +10,8 @@ export const loadDataOnEnter = (loadAction, getDataIdent, getState, isEmpty) =>
         })
 
         const dispToProp = dispatch => ({
-            load(dataIdent) {
-                dispatch(loadAction(dataIdent))
+            load(dataIdent, ...args) {
+                return dispatch(loadAction(dataIdent, ...args))
             }
         })
         @connect(stateToProp, dispToProp)
@@ -30,6 +29,7 @@ export const loadDataOnEnter = (loadAction, getDataIdent, getState, isEmpty) =>
                 return store.dispatch(loadAction(getDataIdent(props)))
             }
         }
+        PageShell.scrollLoad = ComposedComponent.scrollLoad
         return PageShell
     }
 

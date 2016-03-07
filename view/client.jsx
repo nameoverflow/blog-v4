@@ -42,7 +42,7 @@ match({ history, routes }, (error, redirectLocation, renderProps) => {
     renderProps.components
         .filter(c => c && c.scrollLoad)
         .map(c => {
-            scrollLoaderBundle.bind(() => c.scrollLoad(store))
+            scrollLoaderBundle.bind(() => c.scrollLoad(store, renderProps))
         })
     render(
         <Root {...{ store, renderProps }} />,

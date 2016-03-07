@@ -13,7 +13,7 @@ import {
 } from '../constants'
 import { CALL_API } from '../middleware'
 
-export const loadIndex = (start, limit) => {
+export const loadIndex = (start = 0, limit = 10) => {
     const url = `${URL_ARTICLE}?start=${start}&limit=${limit}&summary&break`
     return {
         [CALL_API]: {

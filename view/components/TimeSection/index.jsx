@@ -29,7 +29,8 @@ export default class TimeSection extends Component {
                 theSection.style.height = origin
                 theList.style.opacity = 0
                 requestAnimationFrame(() => {
-                    theSection.style.transition = 'height 500ms ease-out'
+                    theList.style.transition = 'opacity 500ms ease-out'
+                    theSection.style.transition = 'height 500ms ease-in-out'
                     theSection.style.height = target
                     theList.style.opacity = 1
                     const callback = () => {
@@ -41,6 +42,7 @@ export default class TimeSection extends Component {
             })
         }).then(() => {
             theSection.style.transition = ''
+            theList.style.transition = ''
             theSection.style.height = 'auto'
         })
     }
@@ -48,8 +50,7 @@ export default class TimeSection extends Component {
         const { display, toggle, data, load, time } = this.props
         const { theSection } = this.refs
         if (display) {
-            toggle(time)
-            return
+            return void(toggle(time))
         }
         const height = this.getHeight()
         theSection.style.height = height
