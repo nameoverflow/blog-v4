@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import fetch from 'isomorphic-fetch'
 
+import Editor from '../../components/Editor'
 export default class Edit extends Component {
     constructor(props) {
         super(props)
@@ -13,11 +14,14 @@ export default class Edit extends Component {
         }
     }
     load(id) {
-        
+        const url = `${window.location.origin}/api/article/${id}`
+        fetch(url, { method: 'get' })
+            .then(res => res.json())
+            .then(res => this.setState({ post: res }))
     }
     render() {
         return (
-            <div className="Edit"></div>
+            <Editor post={ this.state.post } />
         )
     }
 }

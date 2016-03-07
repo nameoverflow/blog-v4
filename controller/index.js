@@ -68,7 +68,9 @@ export default function addRoutes(server) {
     api.route('/time')
         .get(article.years)
 
-
+    /**
+     * /api/page?start={}&limit={}
+     */
     api.route('/page')
         .get(page.pageList)
         .post(edit('page'))
