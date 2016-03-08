@@ -5,10 +5,12 @@ import marked from 'marked'
 import config from '../config.json'
 import addRoutes from '../controller'
 import render from '../lib/render'
+import cache from '../lib/cache'
 
 const server = new eliter(config)
 
-server.decor(render)
+server.with(render)
+server.with(cache)
 
 marked.setOptions({
     highlight(code, lang, callback) {

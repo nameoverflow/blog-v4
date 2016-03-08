@@ -38,7 +38,16 @@ const edit = type => function *(id, child) {
 export default function addRoutes(server) {
 
     const
-        api = server.route('/api'),
+        api = server.route('/api', function* (child) {
+            if (this.method !== 'get') {
+                const { data: { auth }} = yield this.session()
+                if (!auth) {
+                    return this.error('auth required', 403)
+                }
+                this.cache.clear()
+            }
+            yield* child
+        }),
         admin = server.route('/admin', function* (child) {
             const session = yield this.session()
             if (!session.data.auth) {
@@ -53,7 +62,6 @@ export default function addRoutes(server) {
     server.route('/static/*').get(function* () {
         const path = this.url.pathname.split('/static/')[1]
     })
-
     api.route('/article')
         .get(article.list)
         .post(edit('article'))

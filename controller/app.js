@@ -55,7 +55,11 @@ export default function* () {
         this.redirect(pathname + search)
 
     } else {
-
+        const cache = this.cache.get(this.url.path)
+        if (cache) {
+            this.send('html', cache)
+            return
+        }
         const
             midd = applyMiddleware(apiFactory(makeRequest)),
             store = createStore(reducer, midd)
