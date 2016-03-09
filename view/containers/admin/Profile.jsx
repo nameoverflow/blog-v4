@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import fetch from 'isomorphic-fetch'
 
-import Title from '../Title'
+import Title from '../../components/Title'
 
 export default class Profile extends Component {
     constructor(props) {
