@@ -49,19 +49,22 @@ export default function addRoutes(server) {
             yield* child
         }),
         admin = server.route('/admin', function* (child) {
-            const session = yield this.session()
-            if (!session.data.auth) {
-                this.redirect('/login')
-            } else {
-                yield* child
-            }
+            // const session = yield this.session()
+            // if (!session.data.auth) {
+            //     this.redirect('/login')
+            // } else {
+            //     yield* child
+            // }
+            console.log('admin')
+            yield* child
         })
 
     server.route('/*').get(app)
 
-    server.route('/static/*').get(function* () {
-        const path = this.url.pathname.split('/static/')[1]
+    admin.route('/*').get(function* () {
+        this.render('admin')
     })
+
     api.route('/article')
         .get(article.list)
         .post(edit('article'))

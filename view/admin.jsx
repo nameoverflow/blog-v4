@@ -2,13 +2,20 @@ import "babel-polyfill"
 
 import React from 'react'
 import { render } from 'react-dom'
-
-import { Router, browserHistory, match } from 'react-router'
+import {
+    match,
+    Route,
+    Router,
+    IndexRoute,
+    browserHistory
+} from 'react-router'
 
 import Dashboard from './containers/admin/Dashboard'
 import Profile from './containers/admin/Profile'
 import Edit from './containers/admin/Edit'
 import Login from './containers/admin/Login'
+import Root from './containers/Root'
+
 
 const routes = (
     <Route path="/admin" component={Dashboard}>
@@ -21,11 +28,6 @@ const routes = (
 )
 
 
-render(<Root {...{
-    store,
-    renderProps: {
-        history: browserHistory,
-        routes
-    }}}/>
+render(<Router history={ browserHistory } routes={ routes } />
     , document.getElementById('client'))
 

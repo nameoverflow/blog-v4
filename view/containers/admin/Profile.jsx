@@ -1,8 +1,18 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import fetch from 'isomorphic-fetch'
+import { Link } from 'react-router'
+import Time from '../../components/Time'
 
-import Title from '../../components/Title'
+const Entity = ({ tags, title, _id, createDate }) =>
+    <li>
+        <Link to={`/admin/edit/${_id}`}>
+            <h2> { title } </h2>
+        </Link>
+        <div className='ListMeta'>
+            <Time {...{ createDate }} />
+            { tags && tags[0] ? [' |', ...TagList(tags)] : [] }
+        </div>
+    </li>
 
 export default class Profile extends Component {
     constructor(props) {
@@ -12,14 +22,14 @@ export default class Profile extends Component {
         }
     }
     componentWillMount() {
-        const type = this.props || 'article'
+        const type = this.props.route.name === 'page' ? 'page' : 'article'
         const url = `${window.location.origin}/api/${type}?limit=0`
         fetch(url, { method: 'get' })
             .then(res => res.json())
             .then(res => this.setState({ list: res }))
     }
     render() {
-        const viewList = this.props.list.map(v => <Title { ...v } key={ v.id } />)
+        const viewList = this.state.list.map(v => <Entity { ...v } key={ v.id } />)
         return (
             <div className="Profile">
                 <ul>

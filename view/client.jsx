@@ -39,6 +39,7 @@ const
     history = syncHistoryWithStore(browserHistory, store)
 
 match({ history, routes }, (error, redirectLocation, renderProps) => {
+    console.log('matched once')
     renderProps.components
         .filter(c => c && c.scrollLoad)
         .map(c => {

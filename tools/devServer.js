@@ -10,6 +10,7 @@ new WebpackDevServer(webpack(dev_config), {
     historyApiFallback: true,
     proxy: {
         "/": "http://127.0.0.1:4000",
+        "/admin*": "http://127.0.0.1:4000",
         "/archives": "http://127.0.0.1:4000",
         "/lab": "http://127.0.0.1:4000",
         "/about": "http://127.0.0.1:4000",
