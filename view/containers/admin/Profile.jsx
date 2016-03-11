@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import fetch from 'isomorphic-fetch'
 import { Link } from 'react-router'
 import Time from '../../components/Time'
+import TagList from '../../components/TagList'
 
 const Entity = ({ tags, title, _id, createDate }) =>
     <li>
@@ -29,7 +30,7 @@ export default class Profile extends Component {
             .then(res => this.setState({ list: res }))
     }
     render() {
-        const viewList = this.state.list.map(v => <Entity { ...v } key={ v.id } />)
+        const viewList = this.state.list.map(v => <Entity key={ v._id } { ...v } />)
         return (
             <div className="Profile">
                 <ul>

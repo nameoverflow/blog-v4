@@ -18,13 +18,10 @@ export default class Edit extends Component {
     handleChange(field) {
         return e => {
             const post = Object.assign({}, this.state.post)
-            post[field] = event.target.value
+            post[field] = e.target.value
             if (field === 'bodySource') {
                 post.body = marked(post.bodySource)
             } else if (field === 'tags') {
-                if (post.tags.slice(-1) === ';') {
-                    post.tags = post.tags.slice(0, -1)
-                }
                 post.tags = post.tags.split(';').map(s => s.trim())
             }
             this.setState({

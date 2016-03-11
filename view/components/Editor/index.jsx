@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 
 import ContentView from '../ContentView'
+import FlexibleTextarea from '../FlexibleTextarea'
 
+import './Editor.sass'
 export default class Editor extends Component {
-    constructor(props) {
-        super(props)
+    handleSubmit(e) {
+        e.preventDefault()
     }
     render() {
         const { title, bodySource, tags } = this.props.post
@@ -12,17 +14,20 @@ export default class Editor extends Component {
         return (
             <div className="Editor">
                 <section className="editor-wrapper">
-                    <input
-                        placeholder="Title"
-                        onChange={ handleChange('title') }
-                        value={ title }/>
-                    <input
-                        placeholder="Tags"
-                        onChange={ handleChange('tags') }
-                        value={ tags && tags.join(';') }/>
-                    <textarea
-                        onChange={ handleChange('bodySource') }
-                        value={ bodySource }>{ bodySource }</textarea>
+                    <form onSubmit={ e => this.handleSubmit(e) }>
+                        <input
+                            placeholder="Title"
+                            onChange={ handleChange('title') }
+                            value={ title }/>
+                        <input
+                            placeholder="Tags"
+                            onChange={ handleChange('tags') }
+                            value={ tags && tags.join(';') }/>
+                        <FlexibleTextarea
+                            value={ bodySource }
+                            onChange={ handleChange('bodySource') } />
+                        <button>Submit</button>
+                    </form>
                 </section>
                 <section className="preview-wrapper">
                     <ContentView>{ this.props.post }</ContentView>
