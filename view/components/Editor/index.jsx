@@ -7,6 +7,9 @@ import './Editor.sass'
 export default class Editor extends Component {
     handleSubmit(e) {
         e.preventDefault()
+        const f = e.target
+        const formData = new FormData(f)
+        const url = `${window.location.origin}/api/article`
     }
     render() {
         const { title, bodySource, tags } = this.props.post

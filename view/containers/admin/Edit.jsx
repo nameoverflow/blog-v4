@@ -6,7 +6,11 @@ import Editor from '../../components/Editor'
 export default class Edit extends Component {
     constructor(props) {
         super(props)
-        this.state = { post: {} }
+        this.state = {
+            post: {
+                createDate: new Date().getTime()
+            }
+        }
         this.handleChange = this.handleChange.bind(this)
     }
     componentWillMount() {

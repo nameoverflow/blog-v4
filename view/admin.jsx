@@ -21,7 +21,8 @@ const routes = (
     <Route path="/admin" component={Dashboard}>
         <IndexRoute component={Profile} name='profile'/>
         <Route path="page" component={Profile} name="page"/>
-        <Route path="new" component={Edit} name='new'/>
+        <Route path="new/article" component={Edit} name='newArticle'/>
+        <Route path="new/page" component={Edit} name='newPage'/>
         <Route path="edit/:id" component={Edit} name="edit"/>
         <Route path="login" component={Login} name="Login"/>
     </Route>
