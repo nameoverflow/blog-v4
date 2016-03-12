@@ -1,36 +1,12 @@
 import * as article from './api/article'
 import * as page from './api/page'
+import * as login from './login'
 
-import update from '../model/updatePost'
 import { tagList, tagArticle } from '../model/tags'
 
-import parseEdit from './api/edit'
+import handleEdit from './api/edit'
 import app from './app'
 
-function *finishEdit(id, child, data) {
-    try {
-        if (child) {
-            yield update(id, data)
-        } else {
-            yield update(new_post)
-        }
-        this.send({
-            status:201,
-            headers: {
-                Location: '/admin'
-            }
-        })
-    } catch(e) {
-        console.log(e)
-        this.error(e, 500)
-    }
-}
-
-const edit = type => function *(id, child) {
-    const new_post = yield* parseEdit.call(this)
-    new_post.type = type
-    yield* finishEdit.call(this, id, child, new_post)
-}
 
 /**
  * Add routes to server
@@ -38,40 +14,29 @@ const edit = type => function *(id, child) {
 export default function addRoutes(server) {
 
     const
-        api = server.route('/api', function* (child) {
-            if (this.method !== 'get') {
-                const { data: { auth }} = yield this.session()
-                if (!auth) {
-                    return this.error('auth required', 403)
-                }
-                this.cache.clear()
-            }
-            yield* child
-        }),
+        api = server.route('/api'),
         admin = server.route('/admin', function* (child) {
-            // const session = yield this.session()
-            // if (!session.data.auth) {
-            //     this.redirect('/login')
-            // } else {
-            //     yield* child
-            // }
-            console.log('admin')
-            yield* child
+            const session = yield this.session()
+            if (!session.data.auth) {
+                this.redirect('/login')
+            } else {
+                yield* child
+            }
         })
 
     server.route('/*').get(app)
-
+    server.route('/login')
+        .get(login.get)
+        .post(login.post)
     admin.route('/*').get(function* () {
         this.render('admin')
     })
 
     api.route('/article')
         .get(article.list)
-        .post(edit('article'))
 
     api.route('/article/::')
         .get(article.single)
-        .post(edit('article'))
 
     api.route('/archive/::')
         .get(article.archive)
@@ -84,11 +49,8 @@ export default function addRoutes(server) {
      */
     api.route('/page')
         .get(page.pageList)
-        .post(edit('page'))
-
     api.route('/page/::')
         .get(page.singlePage)
-        .post(edit('page'))
 
     api.route('/tags')
         .get(function* () {
@@ -98,5 +60,24 @@ export default function addRoutes(server) {
         .get(function* (tag) {
             this.send('json', yield tagArticle(decodeURI(tag)))
         })
+
+    const edit = api.route('/edit', function* (child) {
+        if (this.method !== 'get') {
+            const session = yield this.session()
+            console.log('edit: ', session.data)
+            if (!session.data.auth) {
+                return this.error('auth required', 403)
+            }
+            this.cache.clear()
+        }
+        yield* child
+    })
+    edit.route('/article')
+        .post(handleEdit('article'))
+    edit.route('/page')
+        .post(handleEdit('page'))
+    edit.route('/::')
+        .post(handleEdit())
+        .delete(article.remove)
 }
 

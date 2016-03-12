@@ -12,9 +12,7 @@ export default class FlexibleTextarea extends Component {
 
     render() {
         return (
-            <textarea
-                ref='ta'
-                { ...this.props } />
+            <textarea ref='ta' { ...this.props } />
         )
     }
 }

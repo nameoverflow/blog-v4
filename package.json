@@ -22,6 +22,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.5.2",
     "eliter": "^0.2.0",
+    "formidable": "^1.0.17",
     "isomorphic-fetch": "^2.2.1",
     "jade": "^1.11.0",
     "marked": "^0.3.5",

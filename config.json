@@ -1,9 +1,9 @@
 {
+    "admin": {
+        "name": "fucker",
+        "pass": "123"
+    },
     "site": {
-        "admin": {
-            "name": "fucker",
-            "passwd": "123"
-        },
         "db": {
             "url": "mongodb://localhost/blog"
         }
@@ -12,7 +12,7 @@
         "port": 4000
     },
     "view": {
-        "path": "./view/"
+        "path": "./view/templates/"
     },
     "tpl_globals": {
         "static_path": "/static/"

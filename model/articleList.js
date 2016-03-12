@@ -1,7 +1,7 @@
 import { post } from './db'
 
 export function getList(start, limit, fields) {
-    return post.fetchList(start, limit, fields)
+    return post.fetchList(+start, +limit, fields)
 }
 
 export function getByTime(start, end) {
@@ -28,6 +28,7 @@ export function firstYear() {
             .select('createDate')
             .limit(1)
             .exec((err, data) =>
-                err ? rej(err) : res(new Date(data[0].createDate).getFullYear()))
+                err ? rej(err) : res(new Date(data[0].createDate)
+                                        .getFullYear()))
     })
 }

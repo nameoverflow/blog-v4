@@ -13,7 +13,6 @@ import {
 import Dashboard from './containers/admin/Dashboard'
 import Profile from './containers/admin/Profile'
 import Edit from './containers/admin/Edit'
-import Login from './containers/admin/Login'
 import Root from './containers/Root'
 
 
@@ -21,10 +20,11 @@ const routes = (
     <Route path="/admin" component={Dashboard}>
         <IndexRoute component={Profile} name='profile'/>
         <Route path="page" component={Profile} name="page"/>
-        <Route path="new/article" component={Edit} name='newArticle'/>
-        <Route path="new/page" component={Edit} name='newPage'/>
+        <Route path="new" component={Edit}>
+            <Route path="article" name='newArticle'/>
+            <Route path="page" name='newPage'/>
+        </Route>
         <Route path="edit/:id" component={Edit} name="edit"/>
-        <Route path="login" component={Login} name="Login"/>
     </Route>
 )
 

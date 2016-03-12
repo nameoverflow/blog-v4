@@ -28,7 +28,7 @@ export function *single(id) {
 export function *list() {
     const
         start = +this.query['start'] || 0,
-        limit = +this.query['limit'] || 5,
+        limit = +this.query['limit'],
 
         fields = ['summary', 'break', 'body', 'bodySource'].filter(
                     v => this.query.hasOwnProperty(v)),
@@ -70,3 +70,9 @@ export function *years() {
     this.send('json', list)
 }
 
+export function *remove(id) {
+    yield article.remove(id)
+    this.send({
+        status: 204 
+    })
+}

@@ -5,35 +5,33 @@ import FlexibleTextarea from '../FlexibleTextarea'
 
 import './Editor.sass'
 export default class Editor extends Component {
-    handleSubmit(e) {
-        e.preventDefault()
-        const f = e.target
-        const formData = new FormData(f)
-        const url = `${window.location.origin}/api/article`
-    }
     render() {
         const { title, bodySource, tags } = this.props.post
-        const { handleChange } = this.props
+        const { handleChange, isPage, handleSubmit } = this.props
         return (
             <div className="Editor">
                 <section className="editor-wrapper">
-                    <form onSubmit={ e => this.handleSubmit(e) }>
+                    <form onSubmit={ handleSubmit } id="editorForm">
                         <input
+                            name="title"
                             placeholder="Title"
                             onChange={ handleChange('title') }
                             value={ title }/>
                         <input
+                            name="tags"
                             placeholder="Tags"
                             onChange={ handleChange('tags') }
-                            value={ tags && tags.join(';') }/>
+                            value={ tags && tags.join(';') }
+                            style={{ display: isPage ? 'none' : 'block' }}/>
                         <FlexibleTextarea
+                            name="body"
                             value={ bodySource }
                             onChange={ handleChange('bodySource') } />
-                        <button>Submit</button>
+                        <button type="submit">Submit</button>
                     </form>
                 </section>
                 <section className="preview-wrapper">
-                    <ContentView>{ this.props.post }</ContentView>
+                    <ContentView {...{ isPage }}>{ this.props.post }</ContentView>
                 </section>
             </div>
         )
