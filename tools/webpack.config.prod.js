@@ -16,7 +16,7 @@ module.exports = {
     filename: '[name].js'
   },
   plugins: [
-    new ExtractTextPlugin('bundle.css'),
+    new ExtractTextPlugin('[name].css'),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })

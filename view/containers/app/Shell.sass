@@ -45,6 +45,15 @@ sup
     margin: auto
     max-width: 960px
     width: 60%
+.container
+    > div
+        > footer
+            width: 100%
+            text-align: center
+            color: #ccc
+            font-size: 14px
+            line-height: 20px
+            padding: 5rem 0 2rem
 
 .Index, .TagArticle
     padding: 7em 0 0 0
@@ -129,11 +138,8 @@ sup
     @include fill-full(0, 0)
     transform: translateX(-100px)
     opacity: 0
-    // transition: transform 0.5s ease-in, opacity 0.5s ease-out
 
 .route-trans-enter.route-trans-enter-active
-    // transform: translateX(0)
-    // opacity: 1
     animation: route-trans-e 0.8s
     animation-fill-mode: forwards
 
@@ -142,12 +148,8 @@ sup
     @include fill-full(0, 0)
     transform: translateX(0)
     opacity: 1
-    // transition: transform 0.5s ease-in, opacity 0.5s ease-out
 
 .route-trans-leave.route-trans-leave-active
-    // transform: translateX(100px)
-    // opacity: 0
-    // transition: transform 0.5s ease-in, opacity 0.5s ease-out
     animation: route-trans-o 0.8s
     animation-fill-mode: forwards
 

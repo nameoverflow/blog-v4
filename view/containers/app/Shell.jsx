@@ -14,20 +14,25 @@ export default ({ children, location }) => {
     return (
         <div className='Shell'>
             <Sidebar/>
-            <main className='container'>
                 <ReactCSSTransitionGroup
-                    component="div"
-                    className="wrapper"
+                    component="main"
+                    className="container"
                     transitionName="route-trans"
                     transitionEnterTimeout={800}
                     transitionLeaveTimeout={800}
-                >{
-                    React.cloneElement(children, {
-                        key: location.pathname
-                    })
-                }</ReactCSSTransitionGroup>
-            {/* children */}
-            </main>
+                >
+                    <div key={ location.pathname }>
+                        { children }
+                        <footer>
+                            <div>© 2016 - Hcyue</div>
+                            <div>
+                            {'Powered by '}
+                            <a href="https://github.com/nameoverflow/eliter">eliter</a>
+                            {', all rights reserved'}
+                            </div>
+                        </footer>
+                    </div>
+                </ReactCSSTransitionGroup>
         </div>
     )
 }
