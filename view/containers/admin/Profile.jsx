@@ -61,6 +61,9 @@ export default class Profile extends Component {
             })
     }
     handleRemove(item) {
+        if (!confirm("Delete?")) {
+            return
+        }
         const url = `${window.location.origin}/api/edit/${item._id}`
         fetch(url, {
             method: 'DELETE',
@@ -80,13 +83,21 @@ export default class Profile extends Component {
     }
     render() {
         const viewList = this.state.list.map(
-            v => <Entry key={ v._id } handleRemove={ this.handleRemove.bind(this, v) } { ...v } />)
+            v => <Entry
+                    key={ v._id }
+                    handleRemove={ this.handleRemove.bind(this, v) }
+                    { ...v }
+                    />)
         return (
             <div className="Profile">
-                <Link to={`/admin/new/${this.type}`}>New</Link>
-                    <ul>
-                        { viewList }
-                    </ul>
+                <div className="newBtn">
+                <Link to={`/admin/new/${this.type}`}>
+                    New
+                </Link>
+                </div>
+                <ul>
+                    { viewList }
+                </ul>
             </div>
         )
     }
