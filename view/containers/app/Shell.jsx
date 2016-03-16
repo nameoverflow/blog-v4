@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 if (typeof window !== 'undefined') {
-    require('../../assert/normalize.css')
+    require('../../assets/normalize.css')
     require('./Shell.sass')
-    require('../../assert/github.css')
+    require('../../assets/github.css')
 }
 
 import Sidebar from '../../components/Sidebar'

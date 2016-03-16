@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import Time from '../../components/Time'
 import TagList from '../../components/TagList'
 
-import iconBin from '../../assert/bin.svg'
+import iconBin from '../../assets/bin.svg'
 import { scrollLoaderBundle } from '../../utils'
 const Entry = ({ tags, title, _id, createDate, handleRemove }) =>
     <li className='Entry'>
