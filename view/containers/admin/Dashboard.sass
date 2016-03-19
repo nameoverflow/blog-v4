@@ -14,7 +14,6 @@ a
         color: $link_color_h
         border-bottom: 1px $link_color_h solid
 
-
 code
     font-family: Monaco, Menlo, Consolas, 'Microsoft Yahei', monospace
     font-size: 13px
@@ -37,21 +36,22 @@ sup
 .Dashboard
     margin: 5rem auto
     width: 80%
-
-
 .Profile
     padding: 0
     width: 50%
-    margin: auto
+    margin: 5em auto
+    > ul
+        margin: 0
+        padding: 0
     .newBtn
-        width: auto
-        text-align: center
-        margin: 3rem
+        padding-left: 3em
         > a
-            border: 1px solid
-            border-radius: 10px
-            padding: 10px
-    li.Entry
+            border: 0
+            border-radius: 5px
+            background-color: $link_color_d
+            color: #fff
+            padding: 7px 20px
+    .Entry
         position: relative
         font-size: 16px
         list-style: none
@@ -72,4 +72,3 @@ sup
         padding-top: 0.5em
         fill: currentColor
         cursor: pointer
-

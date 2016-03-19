@@ -91,13 +91,13 @@ export default class Profile extends Component {
         return (
             <div className="Profile">
                 <div className="newBtn">
-                <Link to={`/admin/new/${this.type}`}>
-                    New
-                </Link>
-                </div>
-                <ul>
-                    { viewList }
-                </ul>
+                    <Link to={`/admin/new/${this.type}`}>
+                        New
+                    </Link>
+                    </div>
+                    <ul>
+                        { viewList }
+                    </ul>
             </div>
         )
     }
