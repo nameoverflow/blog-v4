@@ -16,7 +16,7 @@ export function getByTime(start, end) {
     return new Promise((res, rej) => {
         post.find(conditions,
             '_id title createDate tags')
-            .sort({ createDate: -1 })
+            .sort({ createDate: 1 })
             .exec((err, data) => err ? rej(err) : res(data))
     })
 }

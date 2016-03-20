@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router'
-
+import { asset } from '../../utils'
 const list = ['home', 'archives', 'tags', 'about']
 
 if (typeof window !== 'undefined') {
     require('./Sidebar.sass')
+    require('../../assets/github.svg')
+    require('../../assets/facebook.svg')
 }
 
 export default () =>
@@ -31,6 +33,14 @@ export default () =>
             )
         }
             </ul>
+        </section>
+        <section className="media">
+            <a href="https://github.com/nameoverflow">
+                <img src="/static/github.svg" />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100004252391322">
+                <img src="/static/facebook.svg" />
+            </a>
         </section>
     </aside>
 
