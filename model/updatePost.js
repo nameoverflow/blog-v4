@@ -1,11 +1,9 @@
 import { post } from './db'
+import makePromise from '../lib/makePromise'
 
 export default function (id, data) {
     if (data) {
-        return new Promise((res, rej) => {
-            post.update({ _id: id }, data,
-                (err) => err ? rej(err) : res())
-        })
+        return makePromise(post.update({ _id: id }, data))
     } else {
         data = id
         data['editDate'] = Date.now()

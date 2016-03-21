@@ -5,8 +5,7 @@ export function getList(start, limit, fields) {
 }
 
 export function getByTime(start, end) {
-    const
-        conditions = {
+    const conditions = {
             type: 'article',
             createDate: {
                 $gte: start,
