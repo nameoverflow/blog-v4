@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
-import path from 'path'
+
 import { connect } from 'react-redux'
 
 export const loadDataOnEnter = (loadAction, getDataIdent, getState, isEmpty) =>
