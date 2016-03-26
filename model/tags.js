@@ -1,5 +1,3 @@
-"use strict"
-
 import { post } from './db'
 import makePromise from '../lib/makePromise'
 
