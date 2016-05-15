@@ -1,5 +1,7 @@
 $link_color_d: rgb(104, 104, 104)
 $link_color_h: rgb(14, 14, 14)
+
+$text-color: rgb(74, 74, 74)
 @mixin fill-full($left, $right)
     position: absolute
     left: $left
@@ -9,7 +11,7 @@ body
     font-family: "PingFang SC", "Microsoft YaHei", sans-serif
     // font-weight: 300
     line-height: 1.7em
-    color: rgb(74, 74, 74)
+    color: $text-color
     overflow-x: hidden
 
 a
@@ -39,6 +41,12 @@ img
 sup
     a
         border-bottom: none
+
+blockquote
+    margin: 1em 0
+    padding: 0 40px
+    box-sizing: border-box
+    border-left: 2px solid $text-color
 
 .container
     box-sizing: border-box
@@ -116,7 +124,8 @@ sup
 @media screen and (max-width: 1024px)
     .container
         @include fill-full(0, 0)
-        padding: 20em 0
+        padding-top: 20em
+        overflow-x: hidden
         max-width: none
         width: auto
         &::before
@@ -128,12 +137,22 @@ sup
             background-color: #cdcdcd
             top: 3.5em
             margin: auto
-    .wrapper > *
-        margin-left: 4%
-        margin-right: 4%
+    .Archives
+        padding: 0 16px
+        margin-top: 7em
+    .container > *
+            margin-left: 4%
+            margin-right: 4%
 @media screen and (max-width: 450px)
     html, body
         font-size: 90%
+    blockquote
+        padding: 0 10px
+    code pre
+        font-size: 80%
+    .title h1,
+    .PageTitle h1
+        font-size: 1.3rem !important
 
 .route-trans-enter
     @include fill-full(0, 0)
@@ -156,23 +175,23 @@ sup
 
 @keyframes route-trans-e
     0%
-        transform: translateX(-100px)
+        transform: translate3d(-100px, 0, 0)
         opacity: 0
     50%
-        transform: translateX(-100px)
+        transform: translate3d(-100px, 0, 0)
         opacity: 0
     100%
-        transform: translateX(0)
+        transform: translate3d(0, 0, 0)
         opacity: 1
 
 @keyframes route-trans-o
     0%
-        transform: translateX(0)
+        transform: translate3d(0, 0, 0)
         opacity: 1
     50%
-        transform: translateX(100px)
+        transform: translate3d(100px, 0, 0)
         opacity: 0
     100%
-        transform: translateX(100px)
+        transform: translate3d(100px, 0, 0)
         opacity: 0
 
