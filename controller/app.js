@@ -69,7 +69,9 @@ export default function* () {
         const
             rendered = getRendered(store, renderProps),
             initial_state = JSON.stringify(store.getState())
-
-        this.render('client', { rendered, initial_state })
+        this.render('client', {
+            rendered,
+            initial_state
+        })
     }
 }

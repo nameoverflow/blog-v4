@@ -7,6 +7,8 @@ import addRoutes from '../controller'
 import render from '../lib/render'
 import cache from '../lib/cache'
 
+import './db'
+
 const server = new eliter(config)
 
 server.with(render)

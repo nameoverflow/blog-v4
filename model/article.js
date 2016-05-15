@@ -1,11 +1,10 @@
-import { post } from './db'
-import makePromise from '../lib/makePromise'
+import post from './postModel'
 
 export const getBody = (id) =>
-    makePromise(post.findById(id, '-bodySource -summary -break -type'))
+    post.findById(id, '-bodySource -summary -break -type').exec()
 
 export const getSource = (id) =>
-    makePromise(post.findById(id))
+    post.findById(id).exec()
 
 export const remove = id =>
-    makePromise(post.findOneAndRemove({ _id: id }))
+    post.findOneAndRemove({ _id: id }).exec()

@@ -1,4 +1,4 @@
-import { post } from './db'
+import post from './postModel'
 
 export function getList(start, limit, fields) {
     return post.fetchList(+start, +limit, fields)

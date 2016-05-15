@@ -6,9 +6,10 @@
   "scripts": {
     "test": "mocha",
     "start": "node tools/starter",
+    "start_win": "set NODE_ENV=production&&node tools/starter",
     "dev": "node tools/devServer.js",
     "deploy": "./node_modules/.bin/webpack -p --config ./tools/webpack.config.prod.js",
-    "forever": "forever start tools/starter"
+    "forever": "export NODE_ENV=production && forever start tools/starter"
   },
   "author": "hcyue",
   "license": "MIT",

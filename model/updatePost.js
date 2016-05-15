@@ -1,15 +1,12 @@
-import { post } from './db'
+import post from './postModel'
 import makePromise from '../lib/makePromise'
 
 export default function (id, data) {
     if (data) {
-        return makePromise(post.update({ _id: id }, data))
+        return post.update({ _id: id }, data).exec
     } else {
         data = id
         data['editDate'] = Date.now()
-        return new Promise((res, rej) => {
-            const cur = new post(data)
-            cur.save((err) => err ? rej(err) : res())
-        })
+        return new post(data).save()
     }
 }

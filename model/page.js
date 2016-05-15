@@ -1,11 +1,10 @@
-import { post } from './db'
+import post from './postModel'
 import makePromise from '../lib/makePromise'
 
 export const getBody = (title) =>
-    makePromise(post.findOne({ title: title }))
+    post.findOne({ title: title }).exec()
 
-export function getList(start, limit = 0) {
-    return post.fetchList(start, limit, [], {
+export const getList = (start, limit = 0) =>
+    post.fetchList(start, limit, [], {
         type: 'page'
     })
-}

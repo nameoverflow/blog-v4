@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var AssetsPlugin = require('assets-webpack-plugin')
 
 var root_path = path.join(__dirname, '..')
 var view_src = path.join(root_path, 'view')
@@ -13,13 +14,17 @@ module.exports = {
   },
   output: {
     path: path.join(root_path, 'public'),
-    filename: '[name].js',
+    filename: '[name].[hash].js',
     publicPath: '/static/'
   },
   plugins: [
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin('[name].[hash].css'),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
+    }),
+    new AssetsPlugin({
+      path: path.join(root_path, 'lib'),
+      filename: 'assets.json'
     })
   ],
   module: {

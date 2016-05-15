@@ -1,8 +1,8 @@
-import { post } from './db'
+import post from './postModel'
 import makePromise from '../lib/makePromise'
 
 export const tagList = () =>
-    makePromise(post.distinct('tags', {}))
+    post.distinct('tags', {}).exec()
 
 export const tagArticle = tag =>
-    makePromise(post.find({ tags: { "$in" : [tag] }}).sort({ createDate: -1 }))
+    post.find({ tags: { "$in" : [tag] }}).sort({ createDate: -1 }).exec()
