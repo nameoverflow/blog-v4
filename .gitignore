@@ -5,6 +5,7 @@ view.ai
 .sass-cache/*
 *.cache
 *.swp
+jsconfig.json
 .idea/
 tmp/
 config.json
