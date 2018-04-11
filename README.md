@@ -1,6 +1,6 @@
 # blog-v4
 
-[Preview](http://hcyue.me)
+Deprecated.
 
 A blog system based on node.js, mongodb, react and redux, supporting isomorphic render.
 
